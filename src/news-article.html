@@ -12,7 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 
-<link rel="import" href="news-article-cover.html">
+<link rel="import" href="amp-viewer.html">
 <link rel="import" href="news-iframe.html">
 <link rel="import" href="news-side-list.html">
 
@@ -46,33 +46,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         flex: 1;
       }
 
-      .preview-cover {
-        display: none;
-      }
-
-      #content {
-        font-size: 16px;
-        line-height: 26px;
-      }
-
-      #content img {
-        max-width: 100%;
-      }
-
-      #content figure {
-        margin-left: 0;
-        margin-right: 0;
-        font-style: italic;
-        color: #999;
-      }
-
-      #content a {
-        color: inherit;
-        font-weight: bold;
-      }
-
-      #content .byline {
-        font-weight: bold;
+      article {
+        min-height: 100vh;
       }
 
       aside {
@@ -111,20 +86,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       /* mobile */
       @media (max-width: 767px) {
+        :host {
+          padding: 0;
+        }
+
         .container {
           display: block;
         }
 
-        .preview-cover {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 1;
-        }
-
-        #content {
-          padding: 24px;
+        article {
+          min-height: 150vh;
         }
 
         aside {
@@ -149,12 +120,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           -webkit-line-clamp: 7;
           -webkit-box-orient: vertical;
         }
-
-        :host-context(.fixed-viewport-height) h1 {
-          font-size: calc(var(--viewport-height) * 0.06);
-          line-height: calc(var(--viewport-height) * 0.07);
-          max-height: calc(var(--viewport-height) * 0.49);
-        }
       }
     </style>
 
@@ -165,10 +130,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]">
       <article class="flex">
-        <news-article-cover id="cover0" class="fade-in"></news-article-cover>
-        <news-article-cover id="cover1" class="preview-cover"></news-article-cover>
-        <news-article-cover id="cover2" class="preview-cover"></news-article-cover>
-        <div id="content" class="fade-in"></div>
+        <amp-viewer id="ampViewer" src="[[_getArticleSrc(article.id)]]"></amp-viewer>
       </article>
 
       <aside>
@@ -211,16 +173,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         article: Object,
 
-        previousArticle: {
-          type: Object,
-          computed: '_computePreviousArticle(category.items, article)'
-        },
-
-        nextArticle: {
-          type: Object,
-          computed: '_computeNextArticle(category.items, article)'
-        },
-
         loading: Boolean,
 
         offline: Boolean,
@@ -239,185 +191,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           notify: true
         },
 
+        active: {
+          type: Boolean,
+          observer: '_activeChanged'
+        },
+
         _routeData: Object
 
       },
 
-      observers: [
-        '_loadArticle(article.html)',
-        '_articleChanged(article)'
-      ],
-
-      attached: function() {
-        this._currentArticleCover = this.$.cover0;
-        this._previousArticleCover = this.$.cover1;
-        this._nextArticleCover = this.$.cover2;
-
-        this._currentArticleCover.article = this.article;
-
-        Polymer.RenderStatus.afterNextRender(this, this._installListeners);
-      },
-
-      _installListeners: function() {
-        this._desktopMediaQuery = window.matchMedia('(min-width: 768px)');
-        this.addEventListener('touchstart', this._touchstart.bind(this));
-        this.addEventListener('touchmove', this._touchmove.bind(this));
-        this.addEventListener('touchend', this._touchend.bind(this));
-      },
-
-      _touchstart: function(event) {
-        if (this._isDesktopWidth()) {
-          return;
-        }
-
-        // Save start coordinates
-        if (!this._touchDir) {
-          this._startX = event.changedTouches[0].clientX;
-          this._startY = event.changedTouches[0].clientY;
-        }
-
-        if (this.previousArticle) {
-          this._previousArticleCover.article = this.previousArticle;
-        }
-        if (this.nextArticle) {
-          this._nextArticleCover.article = this.nextArticle;
-        }
-      },
-
-      _touchmove: function(event) {
-        if (this._isDesktopWidth()) {
-          return;
-        }
-
-        // Is touchmove mostly horizontal or vertical?
-        if (!this._touchDir) {
-          var absX = Math.abs(event.changedTouches[0].clientX - this._startX);
-          var absY = Math.abs(event.changedTouches[0].clientY - this._startY);
-          this._touchDir = absX > absY ? 'x' : 'y';
-        }
-
-        if (this._touchDir === 'x') {
-          // Prevent vertically scrolling when swiping
-          event.preventDefault();
-
-          var dx = Math.round(event.changedTouches[0].clientX - this._startX);
-
-          // Don't translate past the current image if there's no adjacent image in that direction
-          if ((!this.previousArticle && dx > 0) || (!this.nextArticle && dx < 0)) {
-            dx = 0;
-          }
-
-          if (this.previousArticle) {
-            this._translate(this._previousArticleCover, dx - this.offsetWidth, window.pageYOffset);
-          }
-          if (this.nextArticle) {
-            this._translate(this._nextArticleCover, dx + this.offsetWidth, window.pageYOffset);
-          }
-        }
-      },
-
-      _touchend: function(event) {
-        if (this._isDesktopWidth()) {
-          return;
-        }
-
-        // Don't finish swiping if there are still active touches.
-        if (event.touches.length) {
-          return;
-        }
-
-        if (this._touchDir === 'x') {
-          var dx = Math.round(event.changedTouches[0].clientX - this._startX);
-
-          // Don't translate past the current image if there's no adjacent image in that direction
-          if ((!this.previousArticle && dx > 0) || (!this.nextArticle && dx < 0)) {
-            dx = 0;
-          }
-
-          if (dx > 0) {
-            if (dx > 100) {
-              this._translate(this._previousArticleCover, 0, window.pageYOffset, true /* transition */);
-              window.setTimeout(function() {
-                this.set('_routeData.id', this.previousArticle.id);
-                Polymer.AppLayout.scroll({ top: 0 });
-                this._previousArticleCover = this._swapCurrentArticleCovers(this._previousArticleCover);
-                this._resetElementStyles(this._nextArticleCover);
-              }.bind(this), 200);
-            } else {
-              this._translate(this._previousArticleCover, -this.offsetWidth, window.pageYOffset, true /* transition */);
-              window.setTimeout(function() {
-                this._resetElementStyles(this._previousArticleCover);
-                this._resetElementStyles(this._nextArticleCover);
-              }.bind(this), 200);
-            }
-          } else if (dx < 0) {
-            if (dx < -100) {
-              this._translate(this._nextArticleCover, 0, window.pageYOffset, true /* transition */);
-              window.setTimeout(function() {
-                this.set('_routeData.id', this.nextArticle.id);
-                Polymer.AppLayout.scroll({ top: 0 });
-                this._nextArticleCover = this._swapCurrentArticleCovers(this._nextArticleCover);
-                this._resetElementStyles(this._previousArticleCover);
-              }.bind(this), 200);
-            } else {
-              this._translate(this._nextArticleCover, this.offsetWidth, window.pageYOffset, true /* transition */);
-              window.setTimeout(function() {
-                this._resetElementStyles(this._previousArticleCover);
-                this._resetElementStyles(this._nextArticleCover);
-              }.bind(this), 200);
-            }
-          }
-        }
-
-        // Reset touch direction
-        this._touchDir = null;
-      },
-
-      _translate: function(elem, x, y, transition) {
-        elem.style.display = 'block';
-        elem.style.transition = transition ? 'transform 0.2s' : '';
-        elem.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
-      },
-
-      _resetElementStyles: function(elem) {
-        elem.style.display = '';
-        elem.style.transition = '';
-        elem.style.transform = '';
-      },
-
-      _swapCurrentArticleCovers: function(newCover) {
-        var oldCover = this._currentArticleCover;
-        oldCover.classList.remove('fade-in');
-        oldCover.classList.add('preview-cover');
-
-        this._resetElementStyles(newCover);
-        newCover.classList.remove('preview-cover');
-        this._currentArticleCover = newCover;
-        newCover.parentElement.insertBefore(newCover, oldCover);
-
-        return oldCover;
-      },
-
-      _isDesktopWidth: function() {
-        return this._desktopMediaQuery.matches;
-      },
-
-      _loadArticle: function(html) {
-        // If this._currentArticleCover isn't defined here, then it hasn't been stamped yet, and
-        // the template already has the `fade-in` class.
-        if (this._currentArticleCover) {
-          this._currentArticleCover.classList.add('fade-in');
-        }
-        this.$.content.innerHTML = html;
-        this.scopeSubtree(this.$.content);
-      },
-
-      _articleChanged: function(article) {
-        // If this._currentArticleCover isn't defined here, then `attached()` (which hasn't been
-        // run yet) will set the article.
-        if (this._currentArticleCover) {
-          this._currentArticleCover.article = article;
-        }
+      _activeChanged: function(active) {
+        this.$.ampViewer.setVisibilityState(active ? 'visible' : 'hidden');
       },
 
       _tryReconnect: function() {
@@ -432,14 +216,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return value;
       },
 
-      _computePreviousArticle: function(categoryItems, article) {
-        var i = categoryItems.indexOf(article);
-        return i > 0 ? categoryItems[i-1] : null;
-      },
-
-      _computeNextArticle: function(categoryItems, article) {
-        var i = categoryItems.indexOf(article);
-        return (i > -1 && i < categoryItems.length-1) ? categoryItems[i+1] : null;
+      _getArticleSrc: function(id) {
+        return id ? '/data/articles/' + id + '.html' : '';
       }
 
     });

@@ -23,7 +23,6 @@ class ArticlePage(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', handler=MainPage),
-    webapp2.Route('/index.html', handler=MainPage),
     webapp2.Route('/<page>/<category>', handler=MainPage),
     webapp2.Route('/<page>/<category>/', handler=MainPage),
     webapp2.Route('/<page>/<category>/<article_id>', handler=ArticlePage),

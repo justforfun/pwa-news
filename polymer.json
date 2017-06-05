@@ -1,5 +1,5 @@
 {
-  "entrypoint": "index.html",
+  "entrypoint": "/",
   "shell": "src/news-app.html",
   "fragments": [
     "src/news-list.html",
@@ -7,30 +7,17 @@
     "src/news-path-warning.html",
     "src/lazy-resources.html"
   ],
-  "sources": [
-    "src/**/*",
-    "images/**/*",
-    "data/**/*",
-    "bower.json"
+  "sourceGlobs": [
+   "src/**/*",
+   "images/**/*",
+   "data/**/*",
+   "app.yaml",
+   "bower.json",
+   "index.html",
+   "main.py"
   ],
-  "extraDependencies": [
-    "app.yaml",
-    "main.py",
+  "includeDependencies": [
     "manifest.json",
     "bower_components/webcomponentsjs/webcomponents-lite.min.js"
-  ],
-  "builds": [{
-    "name": "bundled",
-    "bundle": true,
-    "js": {"minify": true},
-    "css": {"minify": true},
-    "html": {"minify": true},
-    "addServiceWorker": true
-  },{
-    "name": "unbundled",
-    "js": {"minify": true},
-    "css": {"minify": true},
-    "html": {"minify": true},
-    "addServiceWorker": true
-  }]
+  ]
 }

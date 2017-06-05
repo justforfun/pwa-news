@@ -73,8 +73,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       observers: [
-        '_fetchCategory(category, offline)',
-        '_fetchArticle(article, offline)'
+        '_fetchCategory(category, offline)'
       ],
 
       _computeArticle: function(categoryItems, articleId) {
@@ -85,20 +84,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         }
         return null;
-      },
-
-      _fetchArticle: function(article, offline) {
-        // Don't fail if we become offline but already have a cached version, or if there's
-        // nothing to fetch, or if already loading.
-        if ((offline && article && article.html) || !article || this.loading) {
-          this._setFailure(false);
-          return;
-        }
-        this._fetch('/data/articles/' + article.id + '.html',
-          function(response) {
-            this.set('article.html', this._formatHTML(response));
-          }.bind(this),
-          1 /* attempts */, true /* isRaw */);
       },
 
       _computeCategory: function(categoryName) {

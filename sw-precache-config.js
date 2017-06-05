@@ -4,9 +4,22 @@ module.exports = {
     '/bower_components/webcomponentsjs/webcomponents-lite.min.js',
     '/images/*'
   ],
-  navigateFallback: '/index.html',
+  dynamicUrlToDependencies: {
+    '/': ['index.html']
+  },
+  navigateFallback: '/',
   navigateFallbackWhitelist: [/^(?!.*\.html$|\/data\/).*/],
   runtimeCaching: [
+    {
+      urlPattern: /https:\/\/cdn.ampproject.org\/.*\.js/,
+      handler: 'fastest',
+      options: {
+        cache: {
+          maxEntries: 100,
+          name: 'amp-scripts-cache'
+        }
+      }
+    },
     {
       urlPattern: /.*\.(png|jpg|gif|svg)/i,
       handler: 'fastest',
