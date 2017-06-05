@@ -7,7 +7,7 @@ module.exports = {
   dynamicUrlToDependencies: {
     '/': ['index.html']
   },
-  navigateFallback: '/',
+  navigateFallback: 'index.html',
   navigateFallbackWhitelist: [/^(?!.*\.html$|\/data\/).*/],
   runtimeCaching: [
     {

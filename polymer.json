@@ -1,5 +1,5 @@
 {
-  "entrypoint": "/",
+  "entrypoint": "index.html",
   "shell": "src/news-app.html",
   "fragments": [
     "src/news-list.html",
@@ -16,7 +16,7 @@
    "index.html",
    "main.py"
   ],
-  "includeDependencies": [
+  "extraDependencies": [
     "manifest.json",
     "bower_components/webcomponentsjs/webcomponents-lite.min.js"
   ]
