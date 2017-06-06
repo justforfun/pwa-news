@@ -217,7 +217,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _getArticleSrc: function(id) {
-        return id ? '/data/articles/' + id + '.html' : '';
+        if (id.lastIndexOf("www.repubblica.it") != -1) {
+            return id;
+        }
+        else
+          return id ? '/data/articles/' + id + '.html' : '';
       }
 
     });
