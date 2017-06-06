@@ -144,7 +144,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _getItemImage: function(item) {
-        return item.imgSrc ? '/data/' + item.imgSrc : '';
+        if (item.imgSrc.lastIndexOf("www.repubblica.it") != -1) {
+            return item.imgSrc;
+        }
+        else
+          return item.imgSrc ? '/data/' + item.imgSrc : '';
       },
 
       _timeAgo: function(timestamp) {
