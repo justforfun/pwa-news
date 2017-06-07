@@ -137,7 +137,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _getItemHref: function(item) {
         if (item.id.lastIndexOf("www.repubblica.it") != -1) {
-            return item.id;
+            return encodeURIComponent(item.id);
         }
         else
           return item.id ? '/article/' + this.categoryName + '/' + encodeURIComponent(item.id) : null;
