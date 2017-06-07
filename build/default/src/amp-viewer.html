@@ -94,17 +94,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <footer class="main-footer">
 
           ***/
-          console.log("ci sono");
+
           const header = doc.getElementById('main-header');
           for (let i = 0; i < header.length; i++) {
              header[i].style.display = 'none';
           }
 
+          console.log("header.lenght: " + header.length);
+
           const footer = doc.getElementsByClassName('main-footer');
           for (let i = 0; i < footer.length; i++) {
              footer[i].style.display = 'none';
           }
-
+          console.log("footer.lenght: " + footer.length);
         },
 
    /***
