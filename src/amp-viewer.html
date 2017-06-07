@@ -99,19 +99,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           var header = doc.getElementById('main-header');
           if (header) header.style.display = 'none';
-          /***
-          for (let i = 0; i < header.length; i++) {
-             header[i].style.display = 'none';
-          }
 
-          console.log("header.lenght: " + header.length);
-          ***/
-          
           const footer = doc.getElementsByClassName('main-footer');
           for (let i = 0; i < footer.length; i++) {
              footer[i].style.display = 'none';
           }
-          console.log("footer.lenght: " + footer.length);
+
         },
 
    /***
