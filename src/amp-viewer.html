@@ -103,8 +103,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           // Remove privacy user notification element
 
-          //var amp_user_notification_privacy = doc.getElementById('amp-user-notification-privacy');
-          // if (amp_user_notification_privacy) amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
+          var amp_user_notification_privacy = doc.getElementById('amp-user-notification-privacy');
+          if (amp_user_notification_privacy) amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
           
           const footer = doc.getElementsByClassName('main-footer');
           for (let i = 0; i < footer.length; i++) {
