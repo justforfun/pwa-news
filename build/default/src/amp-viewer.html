@@ -92,12 +92,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             which are the following elements 
             <header id="main-header">
             <footer class="main-footer">
+            <amp-user-notification layout=nodisplay id="amp-user-notification-privacy">
 
           ***/
 
           var header = doc.getElementById('main-header');
           if (header) header.style.display = 'none';
 
+          // Remove privacy user notification element
+          var amp_user_notification_privacy = doc.getElementById('amp-user-notification-privacy');
+          if (amp_user_notification_privacy) amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
+          
           const footer = doc.getElementsByClassName('main-footer');
           for (let i = 0; i < footer.length; i++) {
              footer[i].style.display = 'none';
