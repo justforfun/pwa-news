@@ -209,8 +209,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _getArticleSrc: function(id) {
-        
-        if (id.lastIndexOf("www.repubblica.it") != -1) {
+
+        console.log ("id: " + id);
+        if (id.lastIndexOf('www.repubblica.it') != -1) {
+            console.log ("Si tratta di Rep");
             return id;
         }
         else
