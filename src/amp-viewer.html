@@ -84,9 +84,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               this._host.classList.add('amp-doc-host');
               this.appendChild(this._host);
               this._amp = AMP.attachShadowDoc(this._host, doc, src);
-              this.amp_.setVisibilityState('visible');
             }.bind(this));
           }.bind(this));
+          this.amp_.setVisibilityState('visible');
         },
 
 /****
