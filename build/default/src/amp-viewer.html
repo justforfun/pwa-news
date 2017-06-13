@@ -77,7 +77,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         _loadDocument: function(src) {
           this._fetchDocument(src).then(function(doc) {
             this._ampReadyPromise.then(function(AMP) {
-              this._hideUnwantedElementsOnDocument(doc);
+              // this._hideUnwantedElementsOnDocument(doc);
               this._host = win.document.createElement('div');
               this._host.classList.add('amp-doc-host');
               this.appendChild(this._host);
@@ -85,6 +85,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }.bind(this));
           }.bind(this));
         },
+
+/****
+
+this.ampReadyPromise_.then(AMP => {
+      this.amp_ = AMP.attachShadowDoc(this.host_, doc, url, {});
+      this.win.document.title = this.amp_.title || '';
+      this.amp_.onMessage(this.onMessage_.bind(this));
+      this.amp_.setVisibilityState('visible');
+    });
+
+****/
+
 
         _hideUnwantedElementsOnDocument: function(doc) {
           /****
