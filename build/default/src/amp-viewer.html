@@ -118,11 +118,14 @@ this.ampReadyPromise_.then(AMP => {
           // amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
           // data-show-if-href="https://foo.com/api/show-api?timestamp=TIMESTAMP"
 
+          /***/
           if (amp_user_notification_privacy) {
-            amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
+            //amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
+            amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
             console.log ("Ho trovato elemento amp-user-notification-privacy");
            } 
-          //if (amp_user_notification_privacy) amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
+           /***/
+          
           /***/
           const footer = doc.getElementsByClassName('main-footer');
           for (let i = 0; i < footer.length; i++) {
