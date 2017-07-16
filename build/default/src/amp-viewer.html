@@ -132,13 +132,13 @@ this.ampReadyPromise_.then(AMP => {
              footer[i].style.display = 'none';
           }
 
-          const ampad = doc.getElementsByClassName('amp-ad');
+          const ampad = doc.getElementsByTagName('amp-ad');
           for (let i = 0; i < ampad.length; i++) {
              console.log("Rimuovo attributo da adv n.: " + i);            
              ampad[i].removeAttribute("data-consent-notification-id");
           }
 
-          const ampembed = doc.getElementsByClassName('amp-embed');
+          const ampembed = doc.getElementsByTagName('amp-embed');
           for (let i = 0; i < ampembed.length; i++) {
              console.log("Rimuovo attributo da embed n.: " + i);             
              ampembed[i].removeAttribute("data-consent-notification-id");

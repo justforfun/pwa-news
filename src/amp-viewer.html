@@ -113,6 +113,10 @@ this.ampReadyPromise_.then(AMP => {
           var header = doc.getElementById('main-header');
           if (header) header.style.display = 'none';
 
+          var ampaccess = doc.getElementById('amp-access');
+          if (ampaccess) ampaccess.parentNode.removeChild(ampaccess);
+
+
           // Remove privacy user notification element
 
           /***
