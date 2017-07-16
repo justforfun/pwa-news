@@ -113,12 +113,12 @@ this.ampReadyPromise_.then(AMP => {
 
           // Remove privacy user notification element
 
-          /***/
+          /***
           var amp_user_notification_privacy = doc.getElementById('amp-user-notification-privacy');
           // amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
           // data-show-if-href="https://foo.com/api/show-api?timestamp=TIMESTAMP"
 
-          /***/
+          
           if (amp_user_notification_privacy) {
             //amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
             amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
@@ -130,6 +130,16 @@ this.ampReadyPromise_.then(AMP => {
           const footer = doc.getElementsByClassName('main-footer');
           for (let i = 0; i < footer.length; i++) {
              footer[i].style.display = 'none';
+          }
+
+          const ampad = doc.getElementsByClassName('amp-ad');
+          for (let i = 0; i < ampad.length; i++) {
+             ampad[i].removeAttribute("data-consent-notification-id");
+          }
+
+          const ampembed = doc.getElementsByClassName('amp-embed');
+          for (let i = 0; i < ampembed.length; i++) {
+             ampembed[i].removeAttribute("data-consent-notification-id");
           }
 
         },
