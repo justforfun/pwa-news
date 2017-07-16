@@ -134,11 +134,13 @@ this.ampReadyPromise_.then(AMP => {
 
           const ampad = doc.getElementsByClassName('amp-ad');
           for (let i = 0; i < ampad.length; i++) {
+             console.log("Rimuovo attributo da adv n.: " + i);            
              ampad[i].removeAttribute("data-consent-notification-id");
           }
 
           const ampembed = doc.getElementsByClassName('amp-embed');
           for (let i = 0; i < ampembed.length; i++) {
+             console.log("Rimuovo attributo da embed n.: " + i);             
              ampembed[i].removeAttribute("data-consent-notification-id");
           }
 
