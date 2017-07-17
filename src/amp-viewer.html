@@ -114,7 +114,22 @@ this.ampReadyPromise_.then(AMP => {
           if (header) header.style.display = 'none';
 
           var ampaccess = doc.getElementById('amp-access');
-          if (ampaccess) ampaccess.parentNode.removeChild(ampaccess);
+          
+          const ampAccessConfig = '{
+             "login": {
+                  "login": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/login?rid=READER_ID",
+                  "loginpw": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/login?origin=MV_ACC_PAY&rid=READER_ID",
+                  "registration": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/login?page=registration&origin=MV_PAY&rid=READER_ID",
+                  "logout": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/logout?rid=READER_ID",
+                  "purchase": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/purchase?rid=READER_ID"
+              },
+             "pingback": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/pingback?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+             "authorization": "https://api2.gelocal.it/checkpw-v1/messaggeroveneto/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+             "authorizationFallbackResponse": {"showContent": true}
+          }';
+          
+          //if (ampaccess) ampaccess.parentNode.removeChild(ampaccess);
+          if (ampaccess) ampaccess.innerHTML = ampAccessConfig;
 
 
           // Remove privacy user notification element
@@ -131,6 +146,7 @@ this.ampReadyPromise_.then(AMP => {
             console.log ("Ho trovato elemento amp-user-notification-privacy");
            }
 
+          /***/
            // Remove attribute that triggers dependency by amp-user-notification on <amp-ad> (Banner) and <amp-embed> (Taboola) elements
           const ampad = doc.getElementsByTagName('amp-ad');
           for (let i = 0; i < ampad.length; i++) {
@@ -143,7 +159,7 @@ this.ampReadyPromise_.then(AMP => {
              console.log("Rimuovo attributo da embed n.: " + i);             
              ampembed[i].removeAttribute("data-consent-notification-id");
           } 
-           /***/
+          
           
           /***/
           const footer = doc.getElementsByClassName('main-footer');
