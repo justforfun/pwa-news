@@ -115,7 +115,7 @@ this.ampReadyPromise_.then(AMP => {
 
           var ampaccess = doc.getElementById('amp-access');
           
-          const ampAccessConfig = '{
+          const ampAccessConfig = {
              "login": {
                   "login": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/login?rid=READER_ID",
                   "loginpw": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/login?origin=MV_ACC_PAY&rid=READER_ID",
@@ -123,14 +123,14 @@ this.ampReadyPromise_.then(AMP => {
                   "logout": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/logout?rid=READER_ID",
                   "purchase": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/purchase?rid=READER_ID"
               },
-             "pingback": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/pingback?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+             "pingback": "https://api2.gelocal.it/checkpw-v1/messaggeroveneto/amp/pingback?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
              "authorization": "https://api2.gelocal.it/checkpw-v1/messaggeroveneto/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
              "authorizationFallbackResponse": {"showContent": true}
-          }';
+          };
           
+          
+          if (ampaccess) ampaccess.innerHTML = JSON.stringify(ampAccessConfig);
           //if (ampaccess) ampaccess.parentNode.removeChild(ampaccess);
-          if (ampaccess) ampaccess.innerHTML = ampAccessConfig;
-
 
           // Remove privacy user notification element
 
