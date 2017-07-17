@@ -129,15 +129,9 @@ this.ampReadyPromise_.then(AMP => {
             //amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
             amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
             console.log ("Ho trovato elemento amp-user-notification-privacy");
-           } 
-           /***/
-          
-          /***/
-          const footer = doc.getElementsByClassName('main-footer');
-          for (let i = 0; i < footer.length; i++) {
-             footer[i].style.display = 'none';
-          }
+           }
 
+           // Remove attribute that triggers dependency by amp-user-notification on <amp-ad> (Banner) and <amp-embed> (Taboola) elements
           const ampad = doc.getElementsByTagName('amp-ad');
           for (let i = 0; i < ampad.length; i++) {
              console.log("Rimuovo attributo da adv n.: " + i);            
@@ -148,7 +142,16 @@ this.ampReadyPromise_.then(AMP => {
           for (let i = 0; i < ampembed.length; i++) {
              console.log("Rimuovo attributo da embed n.: " + i);             
              ampembed[i].removeAttribute("data-consent-notification-id");
+          } 
+           /***/
+          
+          /***/
+          const footer = doc.getElementsByClassName('main-footer');
+          for (let i = 0; i < footer.length; i++) {
+             footer[i].style.display = 'none';
           }
+
+
 
         },
 
