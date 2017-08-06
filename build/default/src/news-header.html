@@ -10,6 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="news-iframe.html">
 
 <dom-module id="news-header">
 
@@ -251,6 +252,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="logo" main-title="">
           <a href="/" aria-label$="[[_computeAppHomeLabel(appTitle)]]">[[appTitle]]</a>
         </div>
+        <news-iframe src="http://justforfun.github.io/examples-amp/access.html"></news-iframe>
       </app-toolbar>
       <div class="date-line" role="heading">
         [[category.title]] <span aria-hidden="true">&nbsp;·&nbsp;</span> [[_currentTime()]]
