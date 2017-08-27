@@ -111,8 +111,15 @@ this.ampReadyPromise_.then(AMP => {
           ***/
 
           var header = doc.getElementById('main-header');
-          if (header) header.style.display = 'none';
+          //if (header) header.style.display = 'none';
 
+          /***
+          const pwwelcome = doc.getElementsByClassName('welcome-message');
+          for (let i = 0; i < pwwelcome.length; i++) {
+             pwwelcome[i].style.display = 'block';
+          }
+          ***/
+          
           var ampaccess = doc.getElementById('amp-access');
           
           const ampAccessConfig = {
@@ -141,23 +148,23 @@ this.ampReadyPromise_.then(AMP => {
 
           
           if (amp_user_notification_privacy) {
-            amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
+            // amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
             //amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
-            console.log ("Ho trovato e rimosso elemento amp-user-notification-privacy");
+            // console.log ("Ho trovato e rimosso elemento amp-user-notification-privacy");
            }
 
           /***/
            // Remove attribute that triggers dependency by amp-user-notification on <amp-ad> (Banner) and <amp-embed> (Taboola) elements
           const ampad = doc.getElementsByTagName('amp-ad');
           for (let i = 0; i < ampad.length; i++) {
-             console.log("Rimuovo attributo da adv n.: " + i);            
-             ampad[i].removeAttribute("data-consent-notification-id");
+             //console.log("Rimuovo attributo da adv n.: " + i);            
+             //ampad[i].removeAttribute("data-consent-notification-id");
           }
 
           const ampembed = doc.getElementsByTagName('amp-embed');
           for (let i = 0; i < ampembed.length; i++) {
-             console.log("Rimuovo attributo da embed n.: " + i);             
-             ampembed[i].removeAttribute("data-consent-notification-id");
+             //console.log("Rimuovo attributo da embed n.: " + i);             
+             // ampembed[i].removeAttribute("data-consent-notification-id");
           } 
           
           
