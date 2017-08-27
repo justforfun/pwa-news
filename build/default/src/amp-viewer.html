@@ -111,6 +111,11 @@ this.ampReadyPromise_.then(AMP => {
           var header = doc.getElementById('main-header');
           if (header) header.style.display = 'none';
 
+          const pwwelcome = doc.getElementsByClassName('welcome-message');
+          for (let i = 0; i < pwwelcome.length; i++) {
+             pwwelcome[i].style.display = 'block';
+          }
+
           var ampaccess = doc.getElementById('amp-access');
           
           const ampAccessConfig = {
