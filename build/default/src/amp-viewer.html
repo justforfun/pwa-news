@@ -114,6 +114,7 @@ this.ampReadyPromise_.then(AMP => {
           const pwwelcome = doc.getElementsByClassName('welcome-message');
           for (let i = 0; i < pwwelcome.length; i++) {
              pwwelcome[i].style.display = 'block';
+             console.log ("Ho trovato e riabilitato welcome message");
           }
 
           var ampaccess = doc.getElementById('amp-access');
