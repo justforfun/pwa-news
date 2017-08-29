@@ -38,7 +38,15 @@
           }
       </script>
       
+<!-- 
+curl -H'Origin: http://www.repubblica.it/' -H'X-Forwarded-Host: test-api.repubblica.it' 'http://scripts.kataweb.it/checkpw/test/premium/amp/authorization?rid=amp-kzwAd0wiwZgoJF06iyWkvhZ1nhK2oXERY6uOtGmJwOv_sOfjnQu8co0NfDW40ejh&pubtime=2017-05-09T11:36:22Z&ts=1503929099140&url=http%3A%2F%2Ftangeri.repubblica.it%2Fpolitica/2017/08/29/news/boldrini_stupro_rimini-174147483/&__amp_source_origin=http%3A%2F%2Ftangeri.repubblica.it'
 
+"pingback": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/pingback?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+"authorization": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+
+"pingback": "https://test-api.repubblica.it/checkpw-v1/premium/amp/pingback?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+"authorization": "https://test-api.repubblica.it/checkpw-v1/premium/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+-->
 
 <script id="amp-access" type="application/json">
 {
@@ -49,8 +57,8 @@
         "logout": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/logout?rid=READER_ID",
         "purchase": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/purchase?rid=READER_ID"
     },
-   "pingback": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/pingback?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
-   "authorization": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+   "pingback": "https://test-api.repubblica.it/checkpw-v1/premium/amp/pingback?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+   "authorization": "https://test-api.repubblica.it/checkpw-v1/premium/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
    "authorizationFallbackResponse": {"showContent": false}
 }
 </script>
