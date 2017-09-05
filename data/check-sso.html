@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<script type="text/javascript" src="https://login.kataweb.it/login/js/api/sso-api.js"></script>
+</head>
+<body>
+<!-- 
+https://test-login.kataweb.it/login/docs/SSO-UserGuide.pdf
+
+hashId (richiesto, string) l'hashId dell'utente loggato nell'applicazione (come
+restituito dall'SSO nel comando auth), oppure null se nessun utente risulta loggato
+• callback (richiesto, function) una funzione javascript che verrà chiamata quando
+sarà disponibile l'informazione richiesta. Il parametro che viene restituito nella
+callback ha questa struttura:
+{
+ op: “login”,
+ SSID: “<un SSID valido>”
+}
+le proprietà sono:
+◦ op (sempre presente) può valere
+▪ login se c'è bisogno di fare un autologin
+▪ changeuser se c'è bisogno di un autologin con cambio di utente
+▪ login_manual se ci sarebbe bisogno di un autologin, ma l'utente non può
+loggarsi automaticamente su questa applicazione (per esempio perché deve
+accettare un contratto aggiuntivo oppure deve inserire delle informazioni
+mancanti)
+▪ logout se c'è bisogno di un autologout
+▪ sameuser se non c'è bisogno di nessuna operazione: l'utente loggato
+nell'applicazione coincide con quello loggato sull'SSO
+◦ SSID (presente solamente se op è login o changeuser) un SSID valido con il
+quale eseguire un'operazione di autologin.
+
+-->
+<!-- iframe src="https://login.kataweb.it/login/common/api/sso-frame.jsp?targetDomain=http%3A//www.repubblica.it"></iframe -->
+<script type="text/javascript">
+window.SSOConf = {
+   targetDomain: "http://www.repubblica.it",
+   appId:        "repubblica.it"
+  }
+  SSO.injectFrame();
+
+  
+
+var readCookie = function (name){var nameEQ=name+"=";var ca=document.cookie.split(';');for(var i=0;i<ca.length;i++){var c=ca[i];while(c.charAt(0)==' ')c=c.substring(1,c.length);if(c.indexOf(nameEQ)==0)return c.substring(nameEQ.length,c.length);}
+return null;} 
+
+   
+
+   var readJson = function(){
+		var cookieName = 'rid';
+		var cookieValue = readCookie(cookieName);
+		try { return JSON.parse(unescape(cookieValue.replace(/\\"/g,"\"").replace(/(^"|"$)/g,""))); }
+		catch(e){return null;};
+	}
+
+	var json = readJson();
+	var hashId = json && json.hashId ? json.hashId : null;
+
+  function AutoLoginCallBack(dati) {
+   if ("login" ==  dati.op)   { 
+    //--- non solo loggato sull'applicazione ma lo sono su SSO
+    console.log("AutoLogin - do login");
+    //window.location.href = urlPremiumLogin+dati.SSID;
+   }
+   else  if ("changeuser" ==  dati.op)    {
+    //--- Lo SSO e' loggato con un altro utente: esegui il logout appplicativo del vecchio utente ed esegui login nuovo utente
+    console.log("AutoLogin - do changeuser");
+    //window.location.href = urlPremiumLogin+dati.SSID;
+   }
+   else  if ("login_manual" ==  dati.op)    {
+    //  forzare il login in modo che questo attivi il flusso di registrazione: nessuna azione automatica eseguita
+    //alert("do login_manual");
+    // console.log("AutoLogin - do login_manual");
+   }
+   else  if ("logout" ==  dati.op)    {
+    //--- logout applicativo (NO SSO) e ritorno sulla home
+    console.log("AutoLogin - do logout");
+    //window.location.href = "<%=logout%>";
+   }
+   else  if ("sameuser" ==  dati.op)    {
+    //-- nessuna azione presentare la pagina richiesta
+    console.log("AutoLogin - tutto OK");
+   }
+   else {
+    console.log("AutoLogin - ??????????");
+   }
+  }
+
+  SSO.checkStatusChange(hashId, AutoLoginCallBack);
+
+</script>
+</body>
+</html>
