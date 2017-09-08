@@ -56,10 +56,15 @@
 	<h3>Inserisci un commento</h3>
 
     <script type="text/javascript">
+		var function CalculateId (canonicalurl)
+		{
+			return (canonicalurl);	
+		}
+
     	(function(){
 			
 			var CommentParams = new Object();
-			var idStream = "id:174854835";
+			var idStream = CalculateId("id:174854835");
 			CommentParams.category = "www_repubblica_003";
 			CommentParams.streamTags = [];
 			CommentParams.streamTags.push(idStream);
