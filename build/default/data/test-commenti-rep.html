@@ -57,12 +57,20 @@
 
     <script type="text/javascript">
     	(function(){
-    	
+			
+			var CommentParams = new Object();
+			var idStream = "id:174854835";
+			CommentParams.category = "www_repubblica_003";
+			CommentParams.streamTags = [];
+			CommentParams.streamTags.push(idStream);
+			CommentParams.streamTags.push("term:/repubblica/politica");
+			window.gigyaCommentParams = CommentParams;
+/***
 	    	window.gigyaCommentParams = {
 	    		category: "www_repubblica_003"
 	    		,streamTags: ["id:174854835", "term:/repubblica/politica"]
 	    	};
-	    	
+***/	    	
 	    	try {
 	    	  var otherTags = [];
 	    	  if(otherTags && otherTags.length > 0){
