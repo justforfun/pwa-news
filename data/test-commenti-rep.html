@@ -65,11 +65,14 @@
 		function CalculateId (canonicalurl)
 		{
 			var id = getQueryStringValue("url");
-			// Would write the value of the QueryString-variable called name to the console  
-			var regEx = new RegExp('[^/]+(?=/$|$)');
-			// [^/]+(?=/$|$)
-			id = id.match(regEx);
 
+			var regEx = new RegExp('[^/]+(?=/$|$)');
+
+			id = id.match(regEx).toString();
+			var i = id.lastIndexOf('-');
+			if (i != -1) {
+    			id = id.substr(i);
+			}
 			return (id);	
 		}
 
