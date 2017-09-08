@@ -62,10 +62,11 @@
 
 		function CalculateId (canonicalurl)
 		{
+			var id = getQueryStringValue("url");
 			// Would write the value of the QueryString-variable called name to the console  
 			console.log(getQueryStringValue("url")); 
 
-			return (canonicalurl);	
+			return (id);	
 		}
 
     	(function(){

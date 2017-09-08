@@ -66,7 +66,9 @@
 		{
 			var id = getQueryStringValue("url");
 			// Would write the value of the QueryString-variable called name to the console  
-			console.log(getQueryStringValue("url")); 
+			var regEx = new RegExp('[^/]+(?=/$|$)');
+			// [^/]+(?=/$|$)
+			id = id.match(regEx);
 
 			return (id);	
 		}
