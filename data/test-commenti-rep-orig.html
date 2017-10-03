@@ -46,8 +46,6 @@
 <script type="text/javascript" src="https://www.repstatic.it/minify/sites/repubblica/nazionale/common/common.cache.php?name=common_detail_js"></script>
 <script src="https://www.repstatic.it/minify/sites/repubblica/nazionale/2013-v1/library_01.cache.php?name=detail_js"></script>
 <script src="https://www.repstatic.it/minify/sites/common/config_content_customization_01.cache.php?name=content_nazionale_js"></script>
-<script type="text/javascript" src="https://www.repstatic.it/minify/sites/repubblica/nazionale/2016-v1/config.cache.php?name=common_js&v=7"></script>
-
 
 </head>
 <body>
@@ -59,11 +57,7 @@
 
 	<h3>Inserisci un commento</h3>
 
-
     <script type="text/javascript">
-
-		
-
 		function getQueryStringValue (key) {  
   			return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
 		}  
@@ -82,15 +76,6 @@
 			return (id);	
 		}
 
-(function(){
-    	
- 	window.gigyaCommentParams = {
-	    		category: "www_repubblica_003"
-	    		,streamTags: ["id:174854835", "term:/repubblica/politica"]
-	    	};
-
-})();
-/***
     	(function(){
 			
 			var CommentParams = new Object();
@@ -101,7 +86,12 @@
 			CommentParams.streamTags.push("term:/repubblica/politica");
 			window.gigyaCommentParams = CommentParams;
 			
-			
+/***
+	    	window.gigyaCommentParams = {
+	    		category: "www_repubblica_003"
+	    		,streamTags: ["id:174854835", "term:/repubblica/politica"]
+	    	};
+***/	    	
 	    	try {
 	    	  var otherTags = [];
 	    	  if(otherTags && otherTags.length > 0){
@@ -110,7 +100,7 @@
 	    	} catch(e){}
     	
     	})();
-***/
+
     	</script>
 
     	<a id="commenta"></a>
@@ -122,3 +112,4 @@
 
 </body>
 </html>
+

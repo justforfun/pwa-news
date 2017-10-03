@@ -85,7 +85,9 @@ https://tangeri.repubblica.it/api/checkpw-v1/
         "loginpw": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/login?origin=MV_ACC_PAY&rid=READER_ID",
         "registration": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/login?page=registration&origin=MV_PAY&rid=READER_ID",
         "logout": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/logout?rid=READER_ID",
-        "purchase": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/purchase?rid=READER_ID"
+        "purchase": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/purchase?rid=READER_ID",
+        "commenta": "https://login.kataweb.it/static/testcert/test-pwa/check-sso.html?rid=READER_ID&url=CANONICAL_URL&hash_id=AUTHDATA(profile.hash_id)"
+
     },
    "pingback": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/pingback?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
    "authorization": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
@@ -323,6 +325,7 @@ cd[article_content_tier]=locked&cd[is_subscriber]=true
             Benvenuto <span>{{profile.nickname}}</span>
         </p>
         </template>
+        <a on="tap:amp-access.login-commenta" class="logout">Commenta</a>&nbsp;
         <a on="tap:amp-access.login-logout" class="logout">Esci</a>
     </div> 
 </header>
