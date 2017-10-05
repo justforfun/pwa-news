@@ -75,11 +75,8 @@ curl -H'Origin: http://www.repubblica.it/' -H'X-Forwarded-Host: test-api.repubbl
    "authorization": "https://test-api.repubblica.it/checkpw-v1/premium/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
    "authorizationFallbackResponse": {"showContent": false}
 }
-https://tangeri.repubblica.it/api/checkpw-v1/
--->
 
-<script id="amp-access" type="application/json">
-{
+
    "login": {
         "login": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/login?rid=READER_ID",
         "loginpw": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/login?origin=MV_ACC_PAY&rid=READER_ID",
@@ -90,7 +87,25 @@ https://tangeri.repubblica.it/api/checkpw-v1/
 
     },
    "pingback": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/pingback?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
-   "authorization": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+   "authorization": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+   "authorizationFallbackResponse": {"showContent": false}
+}
+https://tangeri.repubblica.it/api/checkpw-v1/
+-->
+
+<script id="amp-access" type="application/json">
+{
+   "login": {
+        "login": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/login?rid=READER_ID",
+        "loginpw": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/login?origin=MV_ACC_PAY&rid=READER_ID",
+        "registration": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/login?page=registration&origin=MV_PAY&rid=READER_ID",
+        "logout": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/logout?rid=READER_ID",
+        "purchase": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/purchase?rid=READER_ID",
+        "commenta": "https://login.kataweb.it/static/testcert/test-pwa/check-sso.html?rid=READER_ID&url=CANONICAL_URL&hash_id=AUTHDATA(profile.hash_id)"
+
+    },
+   "pingback": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/pingback?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+   "authorization": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
    "authorizationFallbackResponse": {"showContent": false}
 }
 </script>
