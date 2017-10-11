@@ -91,6 +91,15 @@ curl -H'Origin: http://www.repubblica.it/' -H'X-Forwarded-Host: test-api.repubbl
    "authorizationFallbackResponse": {"showContent": false}
 }
 https://tangeri.repubblica.it/api/checkpw-v1/
+"login": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/login?rid=READER_ID",
+"loginpw": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/login?origin=MV_ACC_PAY&rid=READER_ID",
+"authorization": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
+
+"login": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/login?rid=READER_ID",
+        "loginpw": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/login?origin=MV_ACC_PAY&rid=READER_ID",
+        "registration": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/login?page=registration&origin=MV_PAY&rid=READER_ID",
+        "logout": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/logout?rid=READER_ID",
+        "purchase": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/purchase?rid=READER_ID",
 -->
 
 <script id="amp-access" type="application/json">
@@ -340,8 +349,8 @@ cd[article_content_tier]=locked&cd[is_subscriber]=true
             Benvenuto <span>{{profile.nickname}}</span>
         </p>
         </template>
-        <a on="tap:amp-access.login-commenta" class="logout">Commenta</a>&nbsp;
-        <a on="tap:amp-access.login-logout" class="logout">Esci</a>
+        <a on="tap:amp-access.login-commenta" class="logout">Commenta</a><span>
+        <a on="tap:amp-access.login-logout" class="logout">Esci</a></span>
     </div> 
 </header>
 
