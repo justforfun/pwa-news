@@ -35,13 +35,13 @@ quale eseguire un'operazione di autologin.
 <!-- iframe src="https://login.kataweb.it/login/common/api/sso-frame.jsp?targetDomain=http%3A//www.repubblica.it"></iframe -->
 <script type="text/javascript">
 window.SSOConf = {
-   targetDomain: "https://login.kataweb.it",
+   targetDomain: "test",
    appId:        "repubblica.it"
   }
-  // SSO.injectFrame();
-
   
 
+  
+/****
 var readCookie = function (name){var nameEQ=name+"=";var ca=document.cookie.split(';');for(var i=0;i<ca.length;i++){var c=ca[i];while(c.charAt(0)==' ')c=c.substring(1,c.length);if(c.indexOf(nameEQ)==0)return c.substring(nameEQ.length,c.length);}
 return null;} 
 
@@ -54,40 +54,122 @@ return null;}
 		catch(e){return null;};
 	}
 
-	var json = readJson();
-	var hashId = json && json.hashId ? json.hashId : null;
+	var readCookieandGenerateJson = function(){
+		var cookieName = 'rid';
+		var cookieValue = readCookie(cookieName);
+		var pairs = cookieValue.split('&');
+		console.log ("pairs: " + pairs);
 
-  function AutoLoginCallBack(dati) {
-   if ("login" ==  dati.op)   { 
-    //--- non solo loggato sull'applicazione ma lo sono su SSO
-    console.log("AutoLogin - do login");
-    //window.location.href = urlPremiumLogin+dati.SSID;
-   }
-   else  if ("changeuser" ==  dati.op)    {
-    //--- Lo SSO e' loggato con un altro utente: esegui il logout appplicativo del vecchio utente ed esegui login nuovo utente
-    console.log("AutoLogin - do changeuser");
-    //window.location.href = urlPremiumLogin+dati.SSID;
-   }
-   else  if ("login_manual" ==  dati.op)    {
-    //  forzare il login in modo che questo attivi il flusso di registrazione: nessuna azione automatica eseguita
-    //alert("do login_manual");
-    // console.log("AutoLogin - do login_manual");
-   }
-   else  if ("logout" ==  dati.op)    {
-    //--- logout applicativo (NO SSO) e ritorno sulla home
-    console.log("AutoLogin - do logout");
-    //window.location.href = "<%=logout%>";
-   }
-   else  if ("sameuser" ==  dati.op)    {
-    //-- nessuna azione presentare la pagina richiesta
-    console.log("AutoLogin - tutto OK");
-   }
-   else {
-    console.log("AutoLogin - ??????????");
-   }
-  }
+		var result = {};
+		pairs.forEach(function(pair) {
+    		pair = pair.split('=');
+    		result[pair[0]] = decodeURIComponent(pair[1] || '');
+		});
 
-  SSO.checkStatusChange(hashId, AutoLoginCallBack);
+		try { return JSON.parse(JSON.stringify(result)); }
+		catch(e){return null;};
+	}
+
+	// var json = readJson();
+	var json = readCookieandGenerateJson();
+	var hashId = json && json.hash_id ? json.hash_id : null;
+	console.log("HashId letto da cookie rid: " + hashId);
+
+
+ "login": {
+        "login": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/login?rid=READER_ID",
+        "loginpw": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/login?origin=MV_ACC_PAY&rid=READER_ID",
+        "registration": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/login?page=registration&origin=MV_PAY&rid=READER_ID",
+        "logout": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/logout?rid=READER_ID",
+        "purchase": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/purchase?rid=READER_ID"
+    },
+rid=amp-F_CTKIHWLtogQ96pwaR5Pw&hash_id=82a75988d61b62fd85325762290334e1
+
+****/
+
+
+		function QueryStringToJSON() {            
+		    var pairs = location.search.slice(1).split('&');
+		    
+		    var result = {};
+		    pairs.forEach(function(pair) {
+		        pair = pair.split('=');
+		        result[pair[0]] = decodeURIComponent(pair[1] || '');
+		    });
+
+		    return JSON.parse(JSON.stringify(result));
+		}
+
+		var query_string = QueryStringToJSON();
+		console.log("query_string: " + JSON.stringify(query_string))
+
+
+		var hashId = query_string && query_string.hash_id ? query_string.hash_id : null;
+		console.log("HashId letto da query string: " + hashId);
+
+		
+		/****
+	 	"login": {
+	        "login": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/login?rid=READER_ID",
+	        "loginpw": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/login?origin=MV_ACC_PAY&rid=READER_ID",
+	        "registration": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/login?page=registration&origin=MV_PAY&rid=READER_ID",
+	        "logout": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/logout?rid=READER_ID",
+	        "purchase": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/purchase?rid=READER_ID"
+	    },
+		rid=amp-F_CTKIHWLtogQ96pwaR5Pw&hash_id=82a75988d61b62fd85325762290334e1
+		****/
+
+
+		function AutoLoginCallBack(dati) {
+		  var urlTmp = "";
+		  var urlCommenti = "";
+		  var urlRedirect = "";
+		  
+		  urlCommenti= "http://dev.repubblica.it:8080/data/test-commenti-rep-orig.html?url="+query_string.url;
+		  urlTmp="https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/login?rid="+query_string.rid+"&return="+query_string.return;
+		  urlRedirect = "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/logout?rid="+query_string.rid+"&"+"return="+encodeURIComponent(urlTmp);
+		  
+		  
+		  console.log ("Redirect to: " + urlRedirect);
+		  console.log ("Return: " + query_string.return);
+		  console.log ("Dati: " + JSON.stringify(dati));
+
+		   if ("login" ==  dati.op)   { 
+		    //--- non solo loggato sull'applicazione ma lo sono su SSO
+		    console.log("AutoLogin - do login");
+		    //window.location.href = urlPremiumLogin+dati.SSID;
+		   }
+		   else  if ("changeuser" ==  dati.op)    {
+		    //--- Lo SSO e' loggato con un altro utente: esegui il logout appplicativo del vecchio utente ed esegui login nuovo utente
+		    console.log("AutoLogin - do changeuser");
+		    window.location.href = urlRedirect;
+		   }
+		   else  if ("login_manual" ==  dati.op)    {
+		    //  forzare il login in modo che questo attivi il flusso di registrazione: nessuna azione automatica eseguita
+		    //alert("do login_manual");
+		    // console.log("AutoLogin - do login_manual");
+		   }
+		   else  if ("logout" ==  dati.op)    {
+		    //--- logout applicativo (NO SSO) e ritorno sulla home
+		    console.log("AutoLogin - do logout");
+		    window.location.href = urlRedirect;
+		   }
+		   else  if ("sameuser" ==  dati.op)    {
+		    	//-- nessuna azione presentare la pagina richiesta
+			    console.log("AutoLogin - tutto OK");
+			    if (dati.hashId){	
+				    window.location.href=urlCommenti;
+				}
+				else {
+					window.location.href = urlRedirect;
+				}
+		   }
+		   else {
+		    console.log("AutoLogin - ??????????");
+		   }
+		  }
+		// Il terzo parametro è il Reset Status
+		SSO.checkStatusChange(hashId, AutoLoginCallBack, true);
 
 </script>
 </body>
