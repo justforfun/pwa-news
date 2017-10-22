@@ -341,6 +341,7 @@ cd[article_content_tier]=locked&cd[is_subscriber]=true
 
 
 <!--
+  "visibilitySpec": {/* optional visibility spec */}
  "extraUrlParams": {
                   "cd[article_content_tier]": "AUTHDATA(fb.fbContentTier)",
                   "cd[is_subscriber]": "AUTHDATA(fb.fbisSubscriber)"
@@ -387,18 +388,7 @@ cd[article_content_tier]=locked&cd[is_subscriber]=true
             "cd[article_content_tier]": "AUTHDATA(fb.fbContentTier)",
             "cd[is_subscriber]": "AUTHDATA(fb.fbisSubscriber)"
           }
-  {
-        "vars": {
-          "apid": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-          "apv": "1.0",
-          "apn": "My AMP Website",
-          "section": "Entertainment",
-          "segA": "Music",
-          "segB": "News",
-          "segC": "Google AMP"
-        }
-      }
-
+  
   {
   "transport": {
     "beacon": false,
@@ -581,12 +571,39 @@ cd[article_content_tier]=locked&cd[is_subscriber]=true
 
 <p></p><p>Lì dove c’è stata la prima significativa presenza della popolazione africana, ai tempi d’oro del distretto della sedia, gli immigrati giunti dal Senegal si radunano per ricordare il 10 agosto di ogni anno le gesta Cheik Ahamodou Bamba che in quella data, nel  ...</p>
 	<div id="paywall-banner">
+      
         <div class="paywall-gradient"></div>
         <div class="paywall-banner-inner">
+        <amp-analytics>
+      
+            <script type="application/json">
+            {
+              "requests":{
+                "host": "https://www.facebook.com",
+                "base": "${host}/tr?noscript=1",
+                "ViewPaywall" : "${base}&ev=ViewPaywall&id=${pixelId}&cd[meter_count]=0"
+              },
+
+              "vars":{
+                "pixelId":"247428115450514"
+              },         
+              "triggers": {
+                "trackPageview": {
+                  "on": "visible",
+                  "request": "ViewPaywall",
+                  "selector": "#paywall-banner-inner",
+                  "selectionMethod": "closest"
+                }
+              }       
+            }  
+            </script>
+        </amp-analytics>
+
             <a class="button1" on="tap:amp-access.login-loginpw">&nbsp;</a>
             <a class="button2" on="tap:amp-access.login-purchase">&nbsp;</a> <a class="button3" on="tap:amp-access.login-registration">&nbsp;</a>
-            <amp-img src="//www.gelestatic.it/cless/messaggeroveneto/2014-v1/img/pw/banner.png" alt="Paywall" layout="responsive" width="320" height="420">
+            <amp-img id="paywall-banner-inner" src="//www.gelestatic.it/cless/messaggeroveneto/2014-v1/img/pw/banner.png" alt="Paywall" layout="responsive" width="320" height="420">
         </amp-img></div>
+      
     </div>
 </div>
         
