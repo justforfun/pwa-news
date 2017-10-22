@@ -100,6 +100,10 @@ https://tangeri.repubblica.it/api/checkpw-v1/
         "registration": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/login?page=registration&origin=MV_PAY&rid=READER_ID",
         "logout": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/logout?rid=READER_ID",
         "purchase": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/purchase?rid=READER_ID",
+
+        {"showContent":false,"premiumContent":true,"fb":{"fbContentTier":"locked","fbisSubscriber":"false"},"pw2":false,"logged":false,"profile":{"nickname":"Luigi Lobello","thumbnailURL":"https:\/\/test.repstatic.it\/cless\/common\/social\/stable\/img\/repubblica\/nazionale\/placeholder-utente.png?provider=site"},"freeview":false,"lstblk":"rep_pay","read":"0","remaining":0,"barrier":0,"pwProfile":{"id":2267,"position":430,"name":"rep-pay","desc":"Contenuti a pagamento Repubblica"},"debug":{"config":{"config":{"VALIDITY_PERIOD":"month"},"page":{"tracked":"true","days":"90000","counters":{"default":["rep_pay"]},"allowedReferrers":[]},"counter":[{"id":"rep_pay","intermediate":[],"limit":0,"redirect":"https:\/\/rep21.repubblica.it"}],"intermediate":[],"profile":{"id":2267,"position":430,"name":"rep-pay","desc":"Contenuti a pagamento Repubblica"},"referrer":[],"rule":{"id":48,"name":"rep-pay"}},"og_url":"https:\/\/rep21.repubblica.it\/data\/widgets\/amp-access-login.html","has_paywall":true,"has_metered":false,"pwProfile":{"id":2267,"position":430,"name":"rep-pay","desc":"Contenuti a pagamento Repubblica"},"pw2":{"pw2":false,"logged":false,"profile":{"nickname":"Luigi Lobello","thumbnailURL":"https:\/\/test.repstatic.it\/cless\/common\/social\/stable\/img\/repubblica\/nazionale\/placeholder-utente.png?provider=site"},"freeview":false,"lstblk":"rep_pay","read":"0","remaining":0,"barrier":0},"counters":{"_vf":"1508054097","_vt":"1509494400","test_rep_pay":{"c":"0","blk":"1"},"_lstblk":"rep_pay","rep_pay":{"c":"0","blk":4}}}}
+
+        "authorizationFallbackResponse": {"showContent": false}
 -->
 
 <script id="amp-access" type="application/json">
@@ -115,7 +119,8 @@ https://tangeri.repubblica.it/api/checkpw-v1/
     },
    "pingback": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/pingback?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
    "authorization": "https://rep21.repubblica.it/api/checkpw-v1/premium/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
-   "authorizationFallbackResponse": {"showContent": false}
+   "authorizationFallbackResponse": {"showContent":false,"premiumContent":true,"fb":{"fbContentTier":"locked","fbisSubscriber":"false"},"pw2":false,"logged":false,"profile":{"nickname":"Luigi Lobello","thumbnailURL":"https:\/\/test.repstatic.it\/cless\/common\/social\/stable\/img\/repubblica\/nazionale\/placeholder-utente.png?provider=site"},"freeview":false,"lstblk":"rep_pay","read":"0","remaining":0,"barrier":0,"pwProfile":{"id":2267,"position":430,"name":"rep-pay","desc":"Contenuti a pagamento Repubblica"},"debug":{"config":{"config":{"VALIDITY_PERIOD":"month"},"page":{"tracked":"true","days":"90000","counters":{"default":["rep_pay"]},"allowedReferrers":[]},"counter":[{"id":"rep_pay","intermediate":[],"limit":0,"redirect":"https:\/\/rep21.repubblica.it"}],"intermediate":[],"profile":{"id":2267,"position":430,"name":"rep-pay","desc":"Contenuti a pagamento Repubblica"},"referrer":[],"rule":{"id":48,"name":"rep-pay"}},"og_url":"https:\/\/rep21.repubblica.it\/data\/widgets\/amp-access-login.html","has_paywall":true,"has_metered":false,"pwProfile":{"id":2267,"position":430,"name":"rep-pay","desc":"Contenuti a pagamento Repubblica"},"pw2":{"pw2":false,"logged":false,"profile":{"nickname":"Luigi Lobello","thumbnailURL":"https:\/\/test.repstatic.it\/cless\/common\/social\/stable\/img\/repubblica\/nazionale\/placeholder-utente.png?provider=site"},"freeview":false,"lstblk":"rep_pay","read":"0","remaining":0,"barrier":0},"counters":{"_vf":"1508054097","_vt":"1509494400","test_rep_pay":{"c":"0","blk":"1"},"_lstblk":"rep_pay","rep_pay":{"c":"0","blk":4}}}}
+
 }
 </script>
 
@@ -286,26 +291,106 @@ cd[article_content_tier]=locked&cd[is_subscriber]=true
         <!-- amp-pixel src="https://www.facebook.com/tr?id=247428115450514&amp;ev=ViewContent&amp;cd[article_content_tier]=AUTHDATA(fb.fbContentTier)&amp;cd[is_subscriber]=AUTHDATA(fb.fbisSubscriber)&amp;noscript=1"
         layout="nodisplay"></amp-pixel -->
 
-    <amp-analytics type="facebookpixel">
+    <!-- amp-analytics type="facebookpixel">
       <script type="application/json">
       {
-          "triggers": {
-            "accessAuthorizationReceived": {
-              "on": "access-authorization-received",
-              "request": "eventViewContent"
+
+        "vars":{
+          "pixelId":"247428115450514"
+        },
+         
+        "triggers": {
+          "accessPingbackSent": {
+             "on": "visible",
+             "request": "eventViewContent",
+             "vars":{
+               "pixelId":"247428115450514"
+             },
+             "extraUrlParams": {
+                  "cd[article_content_tier]": "AUTHDATA(fb.fbContentTier)",
+                  "cd[is_subscriber]": "AUTHDATA(fb.fbisSubscriber)"
             }
-          },
-          "extraUrlParams": {
-            "cd[article_content_tier]": "AUTHDATA(fb.fbContentTier)",
-            "cd[is_subscriber]": "AUTHDATA(fb.fbisSubscriber)"
+
           }
+        }       
+      }  
+      </script>
+    </amp-analytics -->
+  
+
+<!-- da sostituire in prod con "on": "access-viewed", -->
+    <amp-analytics>
+      
+      <script type="application/json">
+      {
+        "requests":{
+          "host": "https://www.facebook.com",
+          "base": "${host}/tr?noscript=1",
+          "eventViewContent": "${base}&ev=ViewContent&id=${pixelId}&cd[article_content_tier]=$AUTHDATA(fb.fbContentTier)&cd[is_subscriber]=$AUTHDATA(fb.fbisSubscriber)"
+        },
+
+        "vars":{
+          "pixelId":"247428115450514"
+        },         
+        "triggers": {
+          "accessViewed": {
+            "on": "visible", 
+            "request": "eventViewContent"
+          }
+        }       
+      }  
+      </script>
+    </amp-analytics>
+
+
+
+<!--
+ "extraUrlParams": {
+                  "cd[article_content_tier]": "AUTHDATA(fb.fbContentTier)",
+                  "cd[is_subscriber]": "AUTHDATA(fb.fbisSubscriber)"
+                }
+
+  // da sostituire in prod con "on": "access-viewed",
+  "accessPingbackSent": {
+             "on": "visible", // da sostituire in prod con "on": "access-pingback-sent",
+             "request": "eventViewContent"
+          },
+
+
+
+<amp-analytics type="facebookpixel">
+      <script type="application/json">
+      {
+
+        "vars":{"pixelId":"247428115450514"},
+        "requests":{"eventViewContent": "${base}&ev=ViewContent&id=${pixelId}&cd[article_content_tier]=$AUTHDATA(fb.fbContentTier)&cd[is_subscriber]=$AUTHDATA(fb.fbisSubscriber)"}, 
+        "triggers": {
+          "accessPingbackSent": {
+             "on": "access-pingback-sent",
+             "request": "eventViewContent"
+          }
+        }       
       }  
       </script>
     </amp-analytics>
   
+ "accessAuthorizationReceived": {
+            "on": "access-authorization-received",
+            "request": "eventViewContent"
+          },
+          "accessAuthorizationFailed": {
+             "on": "access-authorization-failed",
+             "request": "eventViewContent"
+          }, 
+"vars":{
+              "cd[article_content_tier]": "AUTHDATA(fb.fbContentTier)",
+              "cd[is_subscriber]": "AUTHDATA(fb.fbisSubscriber)"
+            }
 
-<!--
-
+"extraUrlParams": {
+            "cd[article_content_tier]": "AUTHDATA(fb.fbContentTier)",
+            "cd[is_subscriber]": "AUTHDATA(fb.fbisSubscriber)"
+          }
   {
         "vars": {
           "apid": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
