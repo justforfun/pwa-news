@@ -389,11 +389,16 @@ cd[article_content_tier]=locked&cd[is_subscriber]=true
 
 <!-- da sostituire in prod con "on": "access-viewed", -->
 
+
+
+
+    <!-- 
+
 <amp-state id="votogenerale"                 
                credentials="include"
                src="https://utilitysocial.repubblica.it/star_rating/index.php?url=CANONICAL_URL">
     </amp-state>
-    <!-- 
+
     The implementation is similar to the previous sample, but also updates the count when the button is clicked 
       
       AMP.setState({
@@ -417,33 +422,43 @@ previousFavoriteWithCount: favoriteWithCount,
                    value: !favoriteWithCount.value,
                    count: favoriteWithCount.count + (favoriteWithCount.value ? -1 : 1),
                  }
+https://utilitysocial.repubblica.it/star_rating/index.php
 
--->
-
-     <form method="post"
-           action-xhr="https://utilitysocial.repubblica.it/star_rating/index.php"
-           target="_top"
-           on="submit:AMP.setState({
-                   hashid: AUTHDATA(profile.hash_id),
-                   url: CANONICAL_URL,
-                   voto: 5
-                
-               }),favorite-failed-message.hide; 
-               submit-error:AMP.setState({
-                 favoriteWithCount: votogenerale.SommaVoti
-               }),favorite-failed-message.show">
-       <amp-list width="200"
+<amp-list width="200"
                  height="56"
                  credentials="include"
                  items="."
                  single-item
                  noloading
-                 src="https://utilitysocial.repubblica.it/star_rating/index.php?url=CANONICAL_URL">
+                 src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
+-->
+    <amp-state id="votogenerale"                 
+               src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
+    </amp-state>
+
+     <form method="post"
+           action-xhr="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL"
+           target="_top"
+           on="submit:AMP.setState({
+                   hashid: $AUTHDATA(profile.hash_id),
+                   url: CANONICAL_URL,
+                   voto: 5
+                
+               }),favorite-failed-message.hide; 
+               submit-error:AMP.setState({
+                 votogenerale: votogenerale.SommaVoti
+               }),favorite-failed-message.show">
+       <amp-list width="200"
+                 height="56"
+                 items="."
+                 single-item
+                 noloading
+                 src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
          <template type="amp-mustache">
            <input type="submit" 
-                   [class]="votogenerale.MediaVoti>2 ? 'heart-fill' : 'heart-border'"
+                   [class]="votogenerale.MediaVoti<2 ? 'heart-border' : 'heart-fill'"
                    value="" aria-label="Favorite Toggle"> 
-           <div class="favorite-count" >Favorites <span [text]="votogenerale.SommaVoti"></span></div>
+           <div class="favorite-count" >Media Voti <span [text]="votogenerale.MediaVoti"></span></div>
          </template>
          <div placeholder>
            <input type="submit" disabled 
