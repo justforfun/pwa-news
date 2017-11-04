@@ -534,57 +534,75 @@ https://utilitysocial.repubblica.it/star_rating/index.php
     <amp-state id="votogenerale" src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
     </amp-state>
 
-     <form method="post" action-xhr="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL" target="_top" on="submit:AMP.setState({
+     <!-- form method="post"
+           action-xhr="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL"
+           target="_top"
+           on="submit:AMP.setState({
                    url: CANONICAL_URL,
                    voto: 5
-                
                }),favorite-failed-message.hide; 
                submit-error:AMP.setState({
                  votogenerale: votogenerale.SommaVoti
                }),favorite-failed-message.show">
-       <amp-list width="200" height="56" items="." single-item="" noloading="" src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
+       <amp-list width="200"
+                 height="56"
+                 items="."
+                 single-item
+                 noloading
+                 src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
          <template type="amp-mustache">
-           <input type="submit" [class]="votogenerale.MediaVoti<2 ? 'heart-border' : 'heart-fill'" value="" aria-label="Favorite Toggle"> 
-           <div class="favorite-count">Media Voti <span [text]="votogenerale.MediaVoti"></span></div>
+           <input type="submit" 
+                   [class]="votogenerale.MediaVoti<2 ? 'heart-border' : 'heart-fill'"
+                   value="" aria-label="Favorite Toggle"> 
+           <div class="favorite-count" >Media Voti <span [text]="votogenerale.MediaVoti"></span></div>
          </template>
-         <div placeholder="">
-           <input type="submit" disabled="" class="heart-loading" value="" aria-label="favorite placeholder" placeholder=""> 
-           <div class="favorite-count loading">Favorites <span>0</span></div>
+         <div placeholder>
+           <input type="submit" disabled 
+                  class="heart-loading"
+                  value="" aria-label="favorite placeholder" placeholder> 
+           <div class="favorite-count loading" >Favorites <span>0</span></div>
          </div>
        </amp-list>
-     </form>
+     </form -->
 
-     <form id="rating" class="p2" method="post" action-xhr="https://utilitysocial.repubblica.it/star_rating/index.php" on="submit:AMP.setState({
-                   hashid: $AUTHDATA(profile.hash_id),
-                   url: CANONICAL_URL,
-                   voto: 5
+
+<!-- 
+{allAnimals: {currentAnimal: 'cat'}} 
+on="submit:AMP.setState({votogenerale:{
+                   contentUrl: CANONICAL_URL,
+                   SommaVoti: 5
                 
-               }),favorite-failed-message.hide; 
+               }}),favorite-failed-message.hide; 
                submit-error:AMP.setState({
                  votogenerale: votogenerale.SommaVoti
-               }),favorite-failed-message.show" target="_blank">
+               }),favorite-failed-message.show" 
+
+
+-->
+     <form id="rating" class="p2" method="post" action-xhr="https://utilitysocial.repubblica.it/star_rating/index.php" target="_blank">
     <fieldset class="rating">
       
       <amp-list width="200" height="56" items="." single-item="" noloading="" src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
     
         <template type="amp-mustache">  
 
+      <input name="url" type="hidden" value="CANONICAL_URL" data-amp-replace="CANONICAL_URL">
 
-       <input name="rating" type="radio" id="rating5" value="5" on="change:rating.submit" [checked]="votogenerale.MediaVoti==5? 'checked' : ''">
+       <input name="voto" type="radio" id="rating5" value="5" on="change:rating.submit" [checked]="votogenerale.MediaVoti==5? 'checked' : ''">
 
-      <input name="rating" type="radio" id="rating4" value="4" on="change:rating.submit" [checked]="votogenerale.MediaVoti==4? 'checked' : ''">
+      <input name="voto" type="radio" id="rating4" value="4" on="change:rating.submit" [checked]="votogenerale.MediaVoti==4? 'checked' : ''">
 
-      <input name="rating" type="radio" id="rating3" value="3" on="change:rating.submit" [checked]="votogenerale.MediaVoti==3? 'checked' : ''">
+      <input name="voto" type="radio" id="rating3" value="3" on="change:rating.submit" [checked]="votogenerale.MediaVoti==3? 'checked' : ''">
 
-      <input name="rating" type="radio" id="rating2" value="2" on="change:rating.submit" [checked]="votogenerale.MediaVoti==2? 'checked' : ''">
+      <input name="voto" type="radio" id="rating2" value="2" on="change:rating.submit" [checked]="votogenerale.MediaVoti==2? 'checked' : ''">
 
-      <input name="rating" type="radio" id="rating1" value="1" on="change:rating.submit" [checked]="votogenerale.MediaVoti==1? 'checked' : ''">
+      <input name="voto" type="radio" id="rating1" value="1" on="change:rating.submit" [checked]="votogenerale.MediaVoti==1? 'checked' : ''">
         </template>
       </amp-list>
     </fieldset>
     <div submit-success="">
       <template type="amp-mustache">
-        <p>Thanks for rating {{rating}} star(s)!</p>
+        <p>Thanks for rating {{voto}} star(s)!</p>
       </template>
     </div>
     <div submit-error="">
