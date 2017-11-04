@@ -309,7 +309,63 @@ Gestione voti
         cursor: pointer;
       }
 
-        
+    /*** 
+     Star Rating
+    ***/
+
+     .rating {
+      --star-size: 3;  /* use CSS variables to calculate dependent dimensions later */
+      padding: 0;  /* to prevent flicker when mousing over padding */
+      border: none;  /* to prevent flicker when mousing over border */
+      unicode-bidi: bidi-override; direction: rtl;  /* for CSS-only style change on hover */
+      text-align: left;  /* revert the RTL direction */
+      user-select: none;  /* disable mouse/touch selection */
+      font-size: 3em;  /* fallback - IE doesn't support CSS variables */
+      font-size: calc(var(--star-size) * 1em);  /* because `var(--star-size)em` would be too good to be true */
+      cursor: pointer;
+      /* disable touch feedback on cursor: pointer - http://stackoverflow.com/q/25704650/1269037 */
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-tap-highlight-color: transparent;
+      margin-bottom: 1em;
+    }
+    /* the stars */
+    .rating > label {
+      display: inline-block;
+      position: relative;
+      width: 1.1em;  /* magic number to overlap the radio buttons on top of the stars */
+      width: calc(var(--star-size) / 3 * 1.1em);
+    }
+    .rating > *:hover,
+    .rating > *:hover ~ label,
+    .rating:not(:hover) > input:checked ~ label {
+      color: transparent;  /* reveal the contour/white star from the HTML markup */
+      cursor: inherit;  /* avoid a cursor transition from arrow/pointer to text selection */
+    }
+    .rating > *:hover:before,
+    .rating > *:hover ~ label:before,
+    .rating:not(:hover) > input:checked ~ label:before {
+      content: "★";
+      position: absolute;
+      left: 0;
+      color: gold;
+    }
+    .rating > input {
+      position: relative;
+      transform: scale(3);  /* make the radio buttons big; they don't inherit font-size */
+      transform: scale(var(--star-size));
+      /* the magic numbers below correlate with the font-size */
+      top: -0.5em;  /* margin-top doesn't work */
+      top: calc(var(--star-size) / 6 * -1em);
+      margin-left: -2.5em;  /* overlap the radio buttons exactly under the stars */
+      margin-left: calc(var(--star-size) / 6 * -5em);
+      z-index: 2;  /* bring the button above the stars so it captures touches/clicks */
+      opacity: 0;  /* comment to see where the radio buttons are */
+      font-size: initial; /* reset to default */
+    }
+    form.amp-form-submit-error [submit-error] {
+      color: red;
+    }
+
       </style>
 
       <script async="" custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
@@ -387,8 +443,7 @@ cd[article_content_tier]=locked&cd[is_subscriber]=true
 
 
 
-<amp-state id="votogenerale" src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
-    </amp-state>
+
     <!-- 
 
 <amp-state id="votogenerale"                 
@@ -428,10 +483,58 @@ https://utilitysocial.repubblica.it/star_rating/index.php
                  single-item
                  noloading
                  src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
+
+  <amp-state id="votogenerale"                 
+               src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
+    </amp-state>
+  
+  <form id="rating" class="p2" method="post" action-xhr="/samples_templates/rating/set" target="_blank">
+    <fieldset class="rating">
+      
+      <amp-list width="200"
+                 height="56"
+                 items="."
+                 single-item
+                 noloading
+                 src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
+    
+        <template type="amp-mustache">  
+
+
+       <input name="rating" type="radio" id="rating5" value="5" on="change:rating.submit" [checked]="votogenerale.MediaVoti==5? 'checked' : ''"/>
+      <label for="rating5" title="5 stars">☆</label>
+
+      <input name="rating" type="radio" id="rating4" value="4" on="change:rating.submit" [checked]="votogenerale.MediaVoti==4? 'checked' : ''"/>
+      <label for="rating4" title="4 stars">☆</label>
+
+      <input name="rating" type="radio" id="rating3" value="3" on="change:rating.submit" [checked]="votogenerale.MediaVoti==3? 'checked' : ''"/>
+      <label for="rating3" title="3 stars">☆</label>
+
+      <input name="rating" type="radio" id="rating2" value="2" on="change:rating.submit" [checked]="votogenerale.MediaVoti==2? 'checked' : ''"/>
+      <label for="rating2" title="2 stars">☆</label>
+
+      <input name="rating" type="radio" id="rating1" value="1" on="change:rating.submit" [checked]="votogenerale.MediaVoti==1? 'checked' : ''"/>
+      <label for="rating1" title="1 stars">☆</label>
+        </template>
+      </amp-list>
+    </fieldset>
+    <div submit-success>
+      <template type="amp-mustache">
+        <p>Thanks for rating {{rating}} star(s)!</p>
+      </template>
+    </div>
+    <div submit-error>
+      <template type="amp-mustache">
+        Looks like something went wrong. Please try to rate again. {{error}}
+      </template>
+    </div>
+  </form>
+
 -->
+    <amp-state id="votogenerale" src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
+    </amp-state>
 
      <form method="post" action-xhr="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL" target="_top" on="submit:AMP.setState({
-                   hashid: $AUTHDATA(profile.hash_id),
                    url: CANONICAL_URL,
                    voto: 5
                 
@@ -450,6 +553,47 @@ https://utilitysocial.repubblica.it/star_rating/index.php
          </div>
        </amp-list>
      </form>
+
+     <form id="rating" class="p2" method="post" action-xhr="https://utilitysocial.repubblica.it/star_rating/index.php" on="submit:AMP.setState({
+                   hashid: $AUTHDATA(profile.hash_id),
+                   url: CANONICAL_URL,
+                   voto: 5
+                
+               }),favorite-failed-message.hide; 
+               submit-error:AMP.setState({
+                 votogenerale: votogenerale.SommaVoti
+               }),favorite-failed-message.show" target="_blank">
+    <fieldset class="rating">
+      
+      <amp-list width="200" height="56" items="." single-item="" noloading="" src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
+    
+        <template type="amp-mustache">  
+
+
+       <input name="rating" type="radio" id="rating5" value="5" on="change:rating.submit" [checked]="votogenerale.MediaVoti==5? 'checked' : ''">
+
+      <input name="rating" type="radio" id="rating4" value="4" on="change:rating.submit" [checked]="votogenerale.MediaVoti==4? 'checked' : ''">
+
+      <input name="rating" type="radio" id="rating3" value="3" on="change:rating.submit" [checked]="votogenerale.MediaVoti==3? 'checked' : ''">
+
+      <input name="rating" type="radio" id="rating2" value="2" on="change:rating.submit" [checked]="votogenerale.MediaVoti==2? 'checked' : ''">
+
+      <input name="rating" type="radio" id="rating1" value="1" on="change:rating.submit" [checked]="votogenerale.MediaVoti==1? 'checked' : ''">
+        </template>
+      </amp-list>
+    </fieldset>
+    <div submit-success="">
+      <template type="amp-mustache">
+        <p>Thanks for rating {{rating}} star(s)!</p>
+      </template>
+    </div>
+    <div submit-error="">
+      <template type="amp-mustache">
+        Looks like something went wrong. Please try to rate again. {{error}}
+      </template>
+    </div>
+  </form>
+
 
     <amp-analytics>
       
