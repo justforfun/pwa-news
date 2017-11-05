@@ -7,8 +7,8 @@
       <title>Senegalesi in festa a Manzano: "Vogliamo contare nel vostro Paese" 
 </title>
       <!-- link rel="canonical" href="http://messaggeroveneto.gelocal.it/udine/cronaca/2017/08/11/news/senegalesi-in-festa-vogliamo-contare-nel-vostro-paese-1.15722298" -->
-      <!-- link rel="canonical" href="https://tangeri.repubblica.it/politica/2017/08/29/news/boldrini_stupro_rimini-174147483/" -->
-      <link rel="canonical" href="http://rep.repubblica.it/generale/2017/10/29/news/shakespeare_ultimo_rebus_e_sepolto_a_westminster_nella_tomba_dei_poeti_-179653279/" >
+      <link rel="canonical" href="https://tangeri.repubblica.it/politica/2017/08/29/news/boldrini_stupro_rimini-174147483/">
+      <!-- link rel="canonical" href="http://rep.repubblica.it/generale/2017/10/29/news/shakespeare_ultimo_rebus_e_sepolto_a_westminster_nella_tomba_dei_poeti_-179653279/" -->
       
       
       <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
@@ -452,7 +452,7 @@ cd[article_content_tier]=locked&cd[is_subscriber]=true
 
 <amp-state id="votogenerale"                 
                credentials="include"
-               src="https://utilitysocial.repubblica.it/star_rating/index.php?url=CANONICAL_URL">
+               src="https://utilitysocial.repubblica.it/star_rating/index.php?geturl=CANONICAL_URL">
     </amp-state>
 
     The implementation is similar to the previous sample, but also updates the count when the button is clicked 
@@ -535,10 +535,7 @@ https://utilitysocial.repubblica.it/star_rating/index.php
   </form>
 
 -->
-    <amp-state id="votogenerale"                 
-               src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
-    </amp-state>
-
+    
      <!-- form method="post"
            action-xhr="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL"
            target="_top"
@@ -582,26 +579,48 @@ on="submit:AMP.setState({votogenerale:{
                  votogenerale: votogenerale.SommaVoti
                }),favorite-failed-message.show" 
 
+src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL"
 
+<input amp-access name="hashid" type="hidden"
+        value="$AUTHDATA(profile.hash_id)"
+        data-amp-replace="$AUTHDATA(profile.hash_id)">
+
+
+<template type="amp-mustache" amp-access-template>
+      <input name="hashid" type="hidden"  value="{{profile.hash_id}}"/>
+      </template>
+
+src="https://justforfun.github.io/push-pwa/auth.json"
+               src="https://utilitysocial.repubblica.it/star_rating/index.php?geturl=CANONICAL_URL"
 -->
+    <amp-state id="votogenerale"                 
+      src="https://utilitysocial.repubblica.it/star_rating/index.php?geturl=CANONICAL_URL">
+    </amp-state>
+
      <form id="rating" class="p2" method="post" 
      action-xhr="https://utilitysocial.repubblica.it/star_rating/index.php" 
                target="_blank">
+    
+
+  
+   
     <fieldset class="rating">
       
-      <amp-list width="200"
+        <amp-list width="200"
                  height="56"
                  items="."
                  single-item
                  noloading
-                 src="https://justforfun.github.io/push-pwa/voto.json?url=CANONICAL_URL">
-    
+                 src="https://utilitysocial.repubblica.it/star_rating/index.php?geturl=CANONICAL_URL"
+                 >
+
         <template type="amp-mustache">  
 
-      <input name="url" type="hidden"
+        <input name="url" type="hidden"
         value="CANONICAL_URL"
         data-amp-replace="CANONICAL_URL">
 
+      
        <input name="voto" type="radio" id="rating5" value="5" on="change:rating.submit" [checked]="votogenerale.MediaVoti==5? 'checked' : ''"/>
 
       <input name="voto" type="radio" id="rating4" value="4" on="change:rating.submit" [checked]="votogenerale.MediaVoti==4? 'checked' : ''"/>
@@ -616,14 +635,15 @@ on="submit:AMP.setState({votogenerale:{
     </fieldset>
     <div submit-success>
       <template type="amp-mustache">
-        <p>Thanks for rating {{voto}} star(s)!</p>
+        <p>Grazie per aver votato!</p>
       </template>
     </div>
     <div submit-error>
       <template type="amp-mustache">
-        Looks like something went wrong. Please try to rate again. {{error}}
+        Oops! Qualcosa è andato storto! Riprova
       </template>
     </div>
+       
   </form>
 
 
