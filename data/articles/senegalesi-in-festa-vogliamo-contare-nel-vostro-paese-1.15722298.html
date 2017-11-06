@@ -613,8 +613,13 @@ src="https://justforfun.github.io/push-pwa/auth.json"
                  noloading
                  src="https://utilitysocial.repubblica.it/star_rating/index.php?geturl=CANONICAL_URL"
                  >
+                 
 
         <template type="amp-mustache">  
+
+        <input name="hashid" type="hidden"
+        value="{{profile.hash_id}}"
+        data-amp-replace="{{profile.hash_id}}">
 
         <input name="url" type="hidden"
         value="CANONICAL_URL"
