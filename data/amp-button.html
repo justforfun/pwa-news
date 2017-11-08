@@ -1,24 +1,21 @@
-<!DOCTYPE html><html amp=""><head>
+<!DOCTYPE html><html ⚡=""><head>
 	<meta charset="utf-8">
 	<title>Access login</title>
+	<meta name="viewport" content="width=device-width,minimum-scale=1">
 	<link rel="canonical" href="https://rep.repubblica.it/data/widgets/amp-access-login-quotidiano.html/">
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
-	
 	<style amp-custom="">
-		a {display: block; background: #024568;border-radius: 3px;padding: 10px;cursor: pointer;text-transform: uppercase;font: 14px/16px 'Helvetica Neue',Helvetica,Arial,sans-serif; color: #FFF;border: none;}
+		a {display: block; background: #024568;border-radius: 3px;padding: 10px;cursor: pointer;text-transform: uppercase;font: 14px/16px 'Helvetica Neue',Helvetica,Arial,sans-serif; color: #FFF;border: none; text-align: center; text-decoration: none;}
 		a:hover{ background: #036091;}
 	</style>
+	<style amp-boilerplate="">body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 	<script async="" custom-element="amp-access" src="https://cdn.ampproject.org/v0/amp-access-0.1.js"></script>
 	<script async="" custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-
-	<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 	<script async="" src="https://cdn.ampproject.org/v0.js"></script>
 	<script id="amp-access" type="application/json">
 		{
 			"login": {
-				"login": "https://rep.repubblica.it/api/checkpw-v1/premium/amp/login?rid=READER_ID"
-			},
-			
+				"login": "https://rep.repubblica.it/api/checkpw-v1/premium/amp/login?rid=READER_ID&return=https://rep.repubblica.it&ref=RETURN_URL"
+			},			
 			"pingback": "https://rep.repubblica.it/api/checkpw-v1/premium/amp/pingback?rid=READER_ID&ts=TIMESTAMP&url=CANONICAL_URL",
 			"authorization": "https://rep.repubblica.it/api/checkpw-v1/premium/amp/authorization?rid=READER_ID&ts=TIMESTAMP&url=CANONICAL_URL",
 			"authorizationFallbackResponse": {
@@ -28,6 +25,7 @@
 	</script>
 </head>
 <body>			
-    <a amp-access="NOT logged" on="tap:amp-access.login-login">Accedi</a>
+		<a amp-access="NOT logged" on="tap:amp-access.login-login">Accedi</a>
+		<a amp-access="logged" target="“_parent”" amp-access-hide="" href="https://rep.repubblica.it">Accedi</a>
 
 </body></html>
