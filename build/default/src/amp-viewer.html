@@ -78,6 +78,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this._fetchDocument(src).then(function(doc) {
             this._ampReadyPromise.then(function(AMP) {
               this._hideUnwantedElementsOnDocument(doc);
+              
+              //this._host = win.currentScript.ownerDocument.createElement('div');
               this._host = win.document.createElement('div');
               this._host.classList.add('amp-doc-host');
               this.appendChild(this._host);
@@ -108,7 +110,7 @@ this.ampReadyPromise_.then(AMP => {
 
           ***/
 
-          var header = doc.getElementById('main-header');
+          //var header = doc.getElementById('main-header');
           //if (header) header.style.display = 'none';
 
           /***
@@ -118,20 +120,10 @@ this.ampReadyPromise_.then(AMP => {
           }
           ***/
           
-          var ampaccess = doc.getElementById('amp-access');
+
+          //var ampaccess = doc.getElementById('amp-access');
           
-          const ampAccessConfig = {
-             "login": {
-                  "login": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/login?rid=READER_ID",
-                  "loginpw": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/login?origin=MV_ACC_PAY&rid=READER_ID",
-                  "registration": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/login?page=registration&origin=MV_PAY&rid=READER_ID",
-                  "logout": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/logout?rid=READER_ID",
-                  "purchase": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/purchase?rid=READER_ID"
-              },
-             "pingback": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/pingback?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
-             "authorization": "https://api.gelocal.it/checkpw-v1/messaggeroveneto/amp/authorization?rid=READER_ID&pubtime=2017-05-09T11:36:22Z&ts=TIMESTAMP&url=CANONICAL_URL",
-             "authorizationFallbackResponse": {"showContent": true}
-          };
+          
           
           
           //if (ampaccess) ampaccess.innerHTML = JSON.stringify(ampAccessConfig);
@@ -140,37 +132,37 @@ this.ampReadyPromise_.then(AMP => {
           // Remove privacy user notification element
 
           /***/
-          var amp_user_notification_privacy = doc.getElementById('amp-user-notification-privacy');
+          // var amp_user_notification_privacy = doc.getElementById('amp-user-notification-privacy');
           // amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
           // data-show-if-href="https://foo.com/api/show-api?timestamp=TIMESTAMP"
 
           
-          if (amp_user_notification_privacy) {
-            // amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
+          //if (amp_user_notification_privacy) {
+            //amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
             //amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
-            // console.log ("Ho trovato e rimosso elemento amp-user-notification-privacy");
-           }
+            //console.log ("Ho trovato e rimosso elemento amp-user-notification-privacy");
+          // }
 
           /***/
            // Remove attribute that triggers dependency by amp-user-notification on <amp-ad> (Banner) and <amp-embed> (Taboola) elements
-          const ampad = doc.getElementsByTagName('amp-ad');
-          for (let i = 0; i < ampad.length; i++) {
+          //const ampad = doc.getElementsByTagName('amp-ad');
+          //for (let i = 0; i < ampad.length; i++) {
              //console.log("Rimuovo attributo da adv n.: " + i);            
              //ampad[i].removeAttribute("data-consent-notification-id");
-          }
+          //}
 
-          const ampembed = doc.getElementsByTagName('amp-embed');
-          for (let i = 0; i < ampembed.length; i++) {
+          //const ampembed = doc.getElementsByTagName('amp-embed');
+          //for (let i = 0; i < ampembed.length; i++) {
              //console.log("Rimuovo attributo da embed n.: " + i);             
              // ampembed[i].removeAttribute("data-consent-notification-id");
-          } 
+          //} 
           
           
           /***/
-          const footer = doc.getElementsByClassName('main-footer');
-          for (let i = 0; i < footer.length; i++) {
-             footer[i].style.display = 'none';
-          }
+          //const footer = doc.getElementsByClassName('main-footer');
+          //for (let i = 0; i < footer.length; i++) {
+          //   footer[i].style.display = 'none';
+          //}
 
 
 
@@ -192,6 +184,7 @@ this.ampReadyPromise_.then(AMP => {
 ****/
         _installScript: function(src) {
           var ownerDoc = this.ownerDocument;
+          //var ownerDoc = this.ownerDocument.ownerDocument;
           var el = ownerDoc.createElement('script');
           el.setAttribute('src', src);
           ownerDoc.head.appendChild(el);

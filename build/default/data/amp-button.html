@@ -14,19 +14,23 @@
 	<script id="amp-access" type="application/json">
 		{
 			"login": {
-				"login": "https://rep.repubblica.it/api/checkpw-v1/premium/amp/login?rid=READER_ID&return=https://rep.repubblica.it&ref=RETURN_URL"
+				"login": "https://rep.repubblica.it/api/checkpw-v1/premium/amp/login?rid=READER_ID&return=https://rep.repubblica.it&ref=RETURN_URL",
+				"logout": "https://rep.repubblica.it/api/checkpw-v1/premium/amp/logout?rid=READER_ID&return=https%3A%2F%2Flogin.kataweb.it%2Flogin%2FSSO%3Fop%3Dlogin%26service%3Dprm.repubblica.it%26backurl%3Dhttps%253A%252F%252Fquotidiano.repubblica.it%252Fedicola%252Fhomerep.jsp&ref=RETURN_URL"
 			},			
 			"pingback": "https://rep.repubblica.it/api/checkpw-v1/premium/amp/pingback?rid=READER_ID&ts=TIMESTAMP&url=CANONICAL_URL",
 			"authorization": "https://rep.repubblica.it/api/checkpw-v1/premium/amp/authorization?rid=READER_ID&ts=TIMESTAMP&url=CANONICAL_URL",
 			"authorizationFallbackResponse": {
-				"logged": false
+				"logged": true, "pw2": true
 			}
 		}
 	</script>
 </head>
 <body>			
 		<a amp-access="NOT logged" on="tap:amp-access.login-login">Accedi</a>
-		<a amp-access="logged AND pw2" target="“_parent”" amp-access-hide="" href="https://rep.repubblica.it">Accedi</a>
-		<a amp-access="logged AND NOT (pw2)" target="“_parent”" amp-access-hide="" href="https://login.kataweb.it/login/SSO?op=login&amp;service=prm.repubblica.it&amp;backurl=https://quotidiano.repubblica.it/edicola/homerep.jsp">Accedi</a>
+		<a amp-access="logged AND pw2" amp-access-hide="" href="https://rep.repubblica.it">Vai</a>
+		<a amp-access="logged AND NOT (pw2)" on="tap:amp-access.login-logout" amp-access-hide="">Accedi LOGOUT-LOGIN</a>
+
+		<!-- target="_parent" -->
+		<!-- a amp-access="logged AND NOT (pw2)" target="“_parent”" amp-access-hide="" href="https://login.kataweb.it/login/SSO?op=login&service=prm.repubblica.it&backurl=https://quotidiano.repubblica.it/edicola/homerep.jsp">Accedi</a-->
 
 </body></html>
