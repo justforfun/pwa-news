@@ -129,10 +129,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         pattern="/:category/:id"
         data="{{_routeData}}"></app-route>
 
-    <div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]">
+    <div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]" id="[[_AmpViewerTrigger('ampViewer2',article.id)]]">
       <article class="flex">
-        <amp-viewer id="ampViewer" src="[[_getArticleSrc(article.id)]]"></amp-viewer>
-        <!-- news-iframe frameborder="0" layout="responsive" src="//dev.repubblica.it:8080/data/test-commenti-rep.html?url=http://www3.repubblica.it/sport/calcio/serie-a/juventus/2017/09/07/news/marotta_mercato-174854835/"></news-iframe -->
+
+        <!-- amp-viewer id="ampViewer" src="[[_getArticleSrc(article.id)]]" style="display: none"></amp-viewer -->
+        <!-- amp-viewer id="ampViewer" src="[[_getArticleSrc(article.id)]]"></amp-viewer -->
+        
       </article>
 
       <aside>
@@ -209,7 +211,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _activeChanged: function(active) {
-        this.$.ampViewer.setVisibilityState(active ? 'visible' : 'hidden');
+        //this.$.ampViewer.setVisibilityState(active ? 'visible' : 'hidden');  
       },
 
       _tryReconnect: function() {
@@ -225,7 +227,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _getArticleSrc: function(id) {
-
+        var ownerDoc = this.ownerDocument;
         console.log ("id: " + id);
         /***
         if (id.lastIndexOf("www.repubblica.it") != -1) {
@@ -234,7 +236,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         else
           ****/
           return id ? '/data/articles/' + id + '.html' : '';
-      }
+      },
+
+      _AmpViewerTrigger: function(idElement, idArticle) {
+        var ownerDoc = this.ownerDocument;
+        var src = this._getArticleSrc (idArticle);
+        newAmpViewer = ownerDoc.createElement('amp-viewer');
+        newAmpViewer.setAttribute('id', idElement);
+        newAmpViewer.setAttribute('src', src);
+        //var AnchorElement = ownerDoc.getElementsByTagName('news-app');
+        //AnchorElement[0].appendChild(newAmpViewer); 
+
+        ownerDoc.body.appendChild(newAmpViewer); 
+        return (idArticle);  
+
+       } 
 
     });
 
