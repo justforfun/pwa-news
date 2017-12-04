@@ -95,6 +95,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       [[articleHeadline]]
     </news-nav>
 
+
+    <!-- iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="path-warning" selected-attribute="active" -->
+
     <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="path-warning" selected-attribute="active">
       <!-- list view of articles in a category -->
       <news-list id="list" name="list" route="[[subroute]]" category-name="{{categoryName}}" category="[[category]]" loading="[[loading]]" offline="[[offline]]" failure="[[failure]]"></news-list>

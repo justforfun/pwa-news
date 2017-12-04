@@ -124,11 +124,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <app-route route="{{route}}" pattern="/:category/:id" data="{{_routeData}}"></app-route>
 
-    <div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]" id="[[_AmpViewerTrigger('ampViewer2',article.id)]]">
+    <!-- div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]" id="[[_AmpViewerTrigger('ampViewer2',article.id)]]" -->
+    <div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]">  
       <article class="flex">
 
         <!-- amp-viewer id="ampViewer" src="[[_getArticleSrc(article.id)]]" style="display: none"></amp-viewer -->
-        <!-- amp-viewer id="ampViewer" src="[[_getArticleSrc(article.id)]]"></amp-viewer -->
+        <amp-viewer id="ampViewer" src="[[_getArticleSrc(article.id)]]"></amp-viewer>
         
       </article>
 
@@ -197,13 +198,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: Boolean,
           observer: '_activeChanged'
         },
+        
+        visible: {
+          type: Boolean,
+          value: false,
+          observer: '_visibleChanged'
+        },
+
 
         _routeData: Object
 
       },
 
+
+      _visibleChanged: function(visible) {
+        this.$.ampViewer._amp.setVisibilityState(visible ? 'visible' : 'hidden');
+      },
+
       _activeChanged: function(active) {
-        //this.$.ampViewer.setVisibilityState(active ? 'visible' : 'hidden');  
+        this.$.ampViewer.setVisibilityState(active ? 'visible' : 'hidden');  
       },
 
       _tryReconnect: function() {

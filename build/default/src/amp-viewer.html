@@ -110,8 +110,8 @@ this.ampReadyPromise_.then(AMP => {
 
           ***/
 
-          //var header = doc.getElementById('main-header');
-          //if (header) header.style.display = 'none';
+          var header = doc.getElementById('main-header');
+          if (header) header.style.display = 'none';
 
           /***
           const pwwelcome = doc.getElementsByClassName('welcome-message');
@@ -132,16 +132,16 @@ this.ampReadyPromise_.then(AMP => {
           // Remove privacy user notification element
 
           /***/
-          // var amp_user_notification_privacy = doc.getElementById('amp-user-notification-privacy');
+          var amp_user_notification_privacy = doc.getElementById('amp-user-notification-privacy');
           // amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
           // data-show-if-href="https://foo.com/api/show-api?timestamp=TIMESTAMP"
 
           
-          //if (amp_user_notification_privacy) {
-            //amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
-            //amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
+          if (amp_user_notification_privacy) {
+            amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
+            amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
             //console.log ("Ho trovato e rimosso elemento amp-user-notification-privacy");
-          // }
+           }
 
           /***/
            // Remove attribute that triggers dependency by amp-user-notification on <amp-ad> (Banner) and <amp-embed> (Taboola) elements
