@@ -38,12 +38,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             return;
           }
 
+          
+
           this._src = src;
           this._clear();
+          console.log("uscito da clear");
           if (!src) {
+            console.log("src non definito");
             this.removeAttribute('src');
           } else {
             this.setAttribute('src', src);
+            console.log ("src: " + src);
             this._loadDocument(src);
           }
         },
@@ -66,7 +71,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         _clear: function() {
+          console.log ("clear amp amp-viewer");
+
           if (this._amp) {
+            console.log("provo a chiudere il documento amp");
             this._amp.close();
             this._amp = null;
           }
@@ -80,7 +88,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this._fetchDocument(src).then(function(doc) {
             this._ampReadyPromise.then(function(AMP) {
               this._hideUnwantedElementsOnDocument(doc);
-              
+              console.log ("doc: " + JSON.stringify(doc));
               //this._host = win.currentScript.ownerDocument.createElement('div');
               this._host = win.document.createElement('div');
               this._host.classList.add('amp-doc-host');
@@ -92,6 +100,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 /****
 
+ 
 this.ampReadyPromise_.then(AMP => {
       this.amp_ = AMP.attachShadowDoc(this.host_, doc, url, {});
       this.win.document.title = this.amp_.title || '';
@@ -103,6 +112,8 @@ this.ampReadyPromise_.then(AMP => {
 
 
         _hideUnwantedElementsOnDocument: function(doc) {
+          
+          console.log("_hideUnwantedElementsOnDocument");
           /****
             Hide Hide navigational and other unwanted elements before displaying
             which are the following elements 
@@ -112,8 +123,8 @@ this.ampReadyPromise_.then(AMP => {
 
           ***/
 
-          var header = doc.getElementById('main-header');
-          if (header) header.style.display = 'none';
+          //var header = doc.getElementById('main-header');
+          //if (header) header.style.display = 'none';
 
           /***
           const pwwelcome = doc.getElementsByClassName('welcome-message');
@@ -134,16 +145,17 @@ this.ampReadyPromise_.then(AMP => {
           // Remove privacy user notification element
 
           /***/
-          var amp_user_notification_privacy = doc.getElementById('amp-user-notification-privacy');
+          // var amp_user_notification_privacy = doc.getElementById('amp-user-notification-privacy');
           // amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
           // data-show-if-href="https://foo.com/api/show-api?timestamp=TIMESTAMP"
 
-          
+          /***
           if (amp_user_notification_privacy) {
             amp_user_notification_privacy.parentNode.removeChild(amp_user_notification_privacy);
             amp_user_notification_privacy.setAttribute("data-show-if-href", "/data/show-amp-user-notification.json?timestamp=TIMESTAMP");
             //console.log ("Ho trovato e rimosso elemento amp-user-notification-privacy");
            }
+          ***/
 
           /***/
            // Remove attribute that triggers dependency by amp-user-notification on <amp-ad> (Banner) and <amp-embed> (Taboola) elements

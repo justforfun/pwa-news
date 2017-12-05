@@ -130,7 +130,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         data="{{_routeData}}"></app-route>
 
     <!-- div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]" id="[[_AmpViewerTrigger('ampViewer2',article.id)]]" -->
+
     <div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]">  
+      
+
       <article class="flex">
 
         <!-- amp-viewer id="ampViewer" src="[[_getArticleSrc(article.id)]]" style="display: none"></amp-viewer -->
@@ -207,22 +210,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           observer: '_activeChanged'
         },
         
+        /****
         visible: {
           type: Boolean,
           value: false,
           observer: '_visibleChanged'
         },
-
+        ****/
 
         _routeData: Object
 
       },
 
-
+/***
       _visibleChanged: function(visible) {
-        this.$.ampViewer._amp.setVisibilityState(visible ? 'visible' : 'hidden');
+        //this.$.ampViewer._amp.setVisibilityState(visible ? 'visible' : 'hidden');
       },
-
+***/
       _activeChanged: function(active) {
         this.$.ampViewer.setVisibilityState(active ? 'visible' : 'hidden');  
       },
@@ -240,7 +244,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _getArticleSrc: function(id) {
-        var ownerDoc = this.ownerDocument;
+        //var ownerDoc = this.ownerDocument;
         console.log ("id: " + id);
         /***
         if (id.lastIndexOf("www.repubblica.it") != -1) {
@@ -248,19 +252,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
         else
           ****/
-          return id ? '/data/articles/' + id + '.html' : '';
+          //if (id)          
+            return id ? '/data/articles/' + id + '.html' : '';
+          //else
+          //  return ('/data/articles/3-reasons-why-chromebooks-might-be-good.html')
       },
 
       _AmpViewerTrigger: function(idElement, idArticle) {
+        /***
         var ownerDoc = this.ownerDocument;
         var src = this._getArticleSrc (idArticle);
         newAmpViewer = ownerDoc.createElement('amp-viewer');
         newAmpViewer.setAttribute('id', idElement);
         newAmpViewer.setAttribute('src', src);
-        //var AnchorElement = ownerDoc.getElementsByTagName('news-app');
-        //AnchorElement[0].appendChild(newAmpViewer); 
-
+        
         ownerDoc.body.appendChild(newAmpViewer); 
+        ***/
         return (idArticle);  
 
        } 
