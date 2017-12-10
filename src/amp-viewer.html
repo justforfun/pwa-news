@@ -112,37 +112,69 @@ this.ampReadyPromise_.then(AMP => {
         _hideUnwantedElementsOnDocument: function(doc) {
           
           console.log("_hideUnwantedElementsOnDocument");
-          var filteredTags=['amp-analytics(type=webtrekk)','amp-user-notification']; 
+          var filteredTags=['amp-analytics(type=webtrekk)','amp-user-notification'];
+          var filteredIds=['bottom-header'];
+          var filteredClasses=['main-footer', 'main-header'];
 
-          filteredTags.forEach(function (item) {
-                            var roules = (item.indexOf("(")>=0 && item.indexOf(")")>=0)?(item.substring(item.lastIndexOf("(")+1,item.lastIndexOf(")"))).split(","): [];
-                            var tag = item.split("(")[0];
-                            var elem = doc.getElementsByTagName(tag);
+          /***
+          <amp-viewer id="ampviewer" src="{{articleSource}}" filtered-ids="[&quot;bottom-header&quot;]" filtered-classes="[&quot;main-footer&quot;,&quot;main-header&quot;]" filtered-tags="[&quot;amp-analytics(type=webtrekk)&quot;,&quot;amp-user-notification&quot;]" listen-to-scroll="true" on-document-loaded="_onDocumentLoaded" on-amp-scroll="_onArticleScrollHandler">
+          </amp-viewer>
+          ***/
 
-                            Array.prototype.forEach.call(elem, function (e) {
-                                var item = e;
-                                console.log("elemento: " + e.innerHTML);
-                                var remove = true;
-                                for (var i = 0 ; i<roules.length; i++){
-                                    var components = roules[i].split("=");
-                                    if (components.length == 2){
-                                        console.log("KEY",components[0]);
-                                        var value = e.getAttribute(components[0]);
-                                        console.log("ATTRIBUTE",value);
-                                        console.log("VALUE",components[1]);
-                                        
-                                        if (value!=components[1]){
-                                            remove = false;
-                                        }
-                                    }
-                                }
-                                if (remove){
-                                    console.log ("rimuovo elemento: " + e.innerHTML);
-                                    e.parentNode.removeChild(e);
-                                }
-                            });   
+
+          if (filteredIds) {
+            filteredIds.forEach(function (item) {
+              console.log("Provo a rimuovere: " + item);
+              var elem = doc.getElementById(item);
+              if (elem) {
+                console.log ("rimuovo elemento: " + elem.innerHTML);
+                elem.parentNode.removeChild(elem);
+              }
             });
-          
+          }
+/***/
+          if (filteredClasses) {
+            filteredClasses.forEach(function (item) {
+              var elem = doc.getElementsByClassName(item);
+              if (elem) {
+                Array.prototype.forEach.call(elem, function (e) {
+                  console.log ("rimuovo elemento: " + e.innerHTML);
+                  e.parentNode.removeChild(e);
+                });
+              }
+            });
+          } 
+/***/
+          if (filteredTags) {
+            filteredTags.forEach(function (item) {
+                              var roules = (item.indexOf("(")>=0 && item.indexOf(")")>=0)?(item.substring(item.lastIndexOf("(")+1,item.lastIndexOf(")"))).split(","): [];
+                              var tag = item.split("(")[0];
+                              var elem = doc.getElementsByTagName(tag);
+
+                              Array.prototype.forEach.call(elem, function (e) {
+                                  var item = e;
+                                  console.log("elemento: " + e.innerHTML);
+                                  var remove = true;
+                                  for (var i = 0 ; i<roules.length; i++){
+                                      var components = roules[i].split("=");
+                                      if (components.length == 2){
+                                          console.log("KEY",components[0]);
+                                          var value = e.getAttribute(components[0]);
+                                          console.log("ATTRIBUTE",value);
+                                          console.log("VALUE",components[1]);
+                                          
+                                          if (value!=components[1]){
+                                              remove = false;
+                                          }
+                                      }
+                                  }
+                                  if (remove){
+                                      console.log ("rimuovo elemento: " + e.innerHTML);
+                                      e.parentNode.removeChild(e);
+                                  }
+                              });   
+            });
+          }           
 
           /****
             Hide Hide navigational and other unwanted elements before displaying
