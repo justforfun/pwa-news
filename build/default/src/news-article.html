@@ -124,16 +124,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <app-route route="{{route}}" pattern="/:category/:id" data="{{_routeData}}"></app-route>
 
-    <div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]" ampid="[[_AmpViewerTrigger('ampViewer',article.id)]]">
+    <!-- div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]" ampid="[[_AmpViewerTrigger('ampViewer',article.id)]]" -->
 
-    <!-- div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]"-->  
+    <div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]">  
       
 
       <!-- article class="flex" style="display: none" -->
-      <article style="display: none">  
+
+      <article class="flex">  
+
 
         <!-- amp-viewer id="ampViewer" src="[[_getArticleSrc(article.id)]]" style="display: none"></amp-viewer -->
-        <!-- amp-viewer id="ampViewer" src="[[_getArticleSrc(article.id)]]"></amp-viewer-->
+        <amp-viewer id="ampViewer" src="[[_getArticleSrc(article.id)]]"></amp-viewer>
         
       </article>
 
@@ -223,25 +225,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _activeChanged: function(active) {
         console.log("_activeChanged: " + active); 
 
+         /***
         var ownerDoc = this.ownerDocument;        
         AmpViewer= ownerDoc.getElementById('ampViewer');
 
         if (AmpViewer){
 
-          /***/
-          //AmpViewer.style.display(active ? 'block' : 'none'); 
+ 
+ 
 
           if (active)
             AmpViewer.style.display = "block";
           else
             AmpViewer.style.display = "none";
-          /***/  
+          
         } 
-/***/
-        if (this.$.ampViewer) 
+        ***/
+        //if (this.$.ampViewer) 
           this.$.ampViewer.setVisibilityState(active ? 'visible' : 'hidden'); 
-        else
-          console.log("AmpViewer undefined");  
+        //else
+          //console.log("AmpViewer undefined");  
  /***/         
       },
 
