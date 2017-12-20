@@ -426,7 +426,7 @@ to{opacity:1}
               },
               "pingback": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/pingback?rid=READER_ID&ts=TIMESTAMP&url=CANONICAL_URL",
               "authorization": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/authorization?rid=READER_ID&ts=TIMESTAMP&url=CANONICAL_URL",
-              "authorizationFallbackResponse": {"showContent": false}
+              "authorizationFallbackResponse": {"showContent": true}
               }
 </script>
 
@@ -608,8 +608,9 @@ to{opacity:1}
         </amp-list>
     </div>
     <div class="detail-comment">
-      <form method="GET" action="https://tangeri.repubblica.it/data/widgets/redirect.html">
-        <input name="redirect" type="hidden" value="CANONICAL_URL/commenti" data-amp-replace="CANONICAL_URL">
+      <!--form method="GET" action="https://tangeri.repubblica.it/data/widgets/redirect.html" -->
+      <form method="GET" action="/data/redirect.html" target="_top">  
+        <input name="redirect" type="hidden" value="CANONICAL_URLcommenti" data-amp-replace="CANONICAL_URL">
         <button><span class="icon-comment"></span><span class="label">Commenta </span></button>
       </form>
     </div>  
@@ -679,7 +680,8 @@ to{opacity:1}
               Si poteva sperare che il calcio fosse migliore del Paese, secondo la retorica per la quale lo sport è avulso dal resto della società. Non è così, non succede mai. Piuttosto è lo specchio, quando non la spugna: assorbe gli umori profondi e li restituisce sotto forma di traverse, pali, quasi gol. Però mettendocela tutta, “bagnando la maglia”. Il calcio sudato e impotente come i nostri tentativi di uscire da una crisi economica più lunga delle piaghe d'Egitto, dieci anni ormai. E se si sale dagli zero virgola si è pur sempre all'ultimo gradino della classifica dei migliori d'Europa.<br>
 <br>
 Con la Svezia, 180 minuti di gioco e nessun gol. E almeno ci è stato risparmiato dai protagonisti il pietoso alibi della sfortuna. Non si bara con il risultato che, proverbialmente, è sempre esatto e mette a nudo la sgangherata gestione dell'azienda Italia dal fatturato in profondo rosso mentre i manager si attaccano alla poltrona perché tengono famiglia, adorano il profumo del potere e non conoscono la parola “dimissioni”.<br>
-Carlo Tavecchio, il presidente federale, si era riparato sotto l'ombrello di un grande allenatore, Antonio Conte, quando le critiche per le sue gaffe lo stavano facendo annegare. Rinfrancato al comando e costretto a cambiare, si è scelto Gian Piero Ventura, massimo successo un campionato di serie C, panchina più prestigiosa quella del Torino. <div class="adv"><amp-ad type="doubleclick" data-slot="/35012960/repubblica.pwa/dettaglio/box1" width="300" height="250"></amp-ad></div> Però l'aura di “maestro dei giovani” per un pallone da rifondare con forze fresche. L'illusione della chance alla nuova generazione si è infranta dietro le convocazioni per la partita della vita: se l'è giocata con gli ultratrentenni (centenari per lo sport), assecondando la piega gerontocratica della Penisola, racchiusa nell'abusato ma veritiero slogan per cui questo è un Paese per vecchi. E quando mai i ragazzi potranno uccidere i padri se viene sempre sottratta loro la prova massima della responsabilità?<br>
+Carlo Tavecchio, il presidente federale, si era riparato sotto l'ombrello di un grande allenatore, Antonio Conte, quando le critiche per le sue gaffe lo stavano facendo annegare. Rinfrancato al comando e costretto a cambiare, si è scelto Gian Piero Ventura, massimo successo un campionato di serie C, panchina più prestigiosa quella del Torino. <div class="adv"><amp-ad type="doubleclick" data-slot="/35012960/repubblica.pwa/dettaglio/box1" width="300" height="250"><div fallback="">TEST FALLBACK</div></amp-ad><amp-ad width="300" height="250" type="doubleclick" data-slot="/35096353/ampte/adx">
+       <div fallback="" style="display:none">Have a great day!</div></amp-ad></div> Però l'aura di “maestro dei giovani” per un pallone da rifondare con forze fresche. L'illusione della chance alla nuova generazione si è infranta dietro le convocazioni per la partita della vita: se l'è giocata con gli ultratrentenni (centenari per lo sport), assecondando la piega gerontocratica della Penisola, racchiusa nell'abusato ma veritiero slogan per cui questo è un Paese per vecchi. E quando mai i ragazzi potranno uccidere i padri se viene sempre sottratta loro la prova massima della responsabilità?<br>
 <br>
 Anche i calciatori crescono lenti, costretti a un destino da bamboccioni, perenni promesse mentre altrove, alla stessa età, alzano Coppe del Mondo. E quando superano la soglia della “brillante promessa” entrano già nella categoria dei “soliti stronzi” per trasporre nello sport la fantastica transizione di Alberto Arbasino riferita agli intellettuali. Nell'ora della verità a Ventura è mancato il coraggio (del resto, uno non se lo può dare), ha abiurato la sua idea di calcio-spettacolo, peraltro mai esibito, ripiegato sul modulo tattico del suo predecessore per scampare al giudizio su un'idea magari sbagliata, ma almeno totalmente sua. E, per sgranare il rosario delle italiche nefandezze, ha rispolverato una sorta di familismo amorale mandando in campo due calciatori suoi quando stava nei club, Immobile e Belotti, benché non al meglio per recenti infortuni. Si contrabbanda, così, un malinteso senso di riconoscenza, verso i propri, verso i senatori, per celare la paura dell'ignoto, della sperimentazione, dell'azzardo. Sventurato quel calcio che non ha un Ulisse.<br>
 <br>
