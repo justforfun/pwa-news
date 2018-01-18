@@ -1,0 +1,59 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/news-app.html",
+  "fragments": [
+    "src/news-list.html",
+    "src/news-article.html",
+    "src/news-path-warning.html",
+    "src/lazy-resources.html"
+  ],
+  "sources": [
+    "src/**/*",
+    "images/**/*",
+    "data/**/*",
+    "app.yaml",
+    "bower.json",
+    "index.html",
+    "main.py",
+    "index.html",
+    "src/news-app.html",
+    "src/news-list.html",
+    "src/news-article.html",
+    "src/news-path-warning.html",
+    "src/lazy-resources.html"
+  ],
+  "extraDependencies": [
+    "bower_components/webcomponentsjs/*.js",
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ],
+  "builds": [
+    {
+      "name": "bundled",
+      "bundle": true,
+      "js": {
+        "minify": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      },
+      "addServiceWorker": true
+    },
+    {
+      "name": "unbundled",
+      "js": {
+        "minify": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      },
+      "addServiceWorker": true
+    }
+  ]
+}
