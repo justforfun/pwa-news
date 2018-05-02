@@ -1,0 +1,92 @@
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Test SWG</title>
+	<script type="application/javascript" src="https://test-dpay.kataweb.it/dpay/edicola/js/jquery-1.4.4.js"></script>
+	<script type="application/javascript" src="https://test-dpay.kataweb.it/dpay/edicola/js/log4javascript.js"></script>
+	<script type="application/javascript">
+		var log = log4javascript.getLogger("google");
+		var appender = new log4javascript.InPageAppender();
+		log.addAppender(appender);
+		log.debug("This is a debugging message from the log4javascript in-page page");
+	</script>
+	<!--                     SWG Markup                                        -->
+	<script type="application/ld+json">
+	{
+		"@context": "http://schema.org",
+		"@type": "NewsArticle",
+		"mainEntityOfPage": " https://rep.repubblica.it/pwa/generale/2018/02/27/news/dalle_tv_alle_banche_gli_eterni_conflitti_d_interesse_di_silvio_berlusconi-189945880/",
+		"headline": " Dalle tv alle banche gli eterni conflitti d’interesse di Berlusconi",
+		"datePublished": "2018-02-27T21:28Z",
+		"dateModified": "2018-02-28T00:35Z",
+		"author": {
+			"@type": "Person",
+			"name": "di SERGIO RIZZO"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Repubblica.it",
+			"logo": {
+				"@type": "ImageObject",
+				"url": " https://www.repstatic.it/cless-mobile/main/nazionale/2016-v1/img/repubblica-logo.png",
+				"width": "180",
+				"height": "35"
+			}
+		},
+		"image": {
+			"@type": "ImageObject",
+			"url": " https://www.gelestatic.it/thimg/qf0dFMiant827gCMI0BTSzp5UXM=/495x330/smart/https://www.repstatic.it/content/localirep/img/rep/2018/02/27/213344098-eb3f6049-9f21-4725-9409-a90603731af2.jpg",
+			"height": "495",
+			"width": "330"
+		},
+		"hasPart": {
+			"@type": "WebPageElement",
+			"cssSelector" : ".paywall",
+			"isAccessibleForFree": "False"
+		},
+		"isPartOf" : {
+			"@type" : [ "CreativeWork" , " Product" ],
+			"name" : "Repubblica.it" ,
+			"productID" : "rep.repubblica.it:web"
+		},
+		"isAccessibleForFree": "False"
+	}
+	</script>
+	<!--                     SWG                                               -->
+	<script type="application/javascript" src="https://news.google.com/swg/js/v1/swg-tt.js" async></script>
+	<script type="application/javascript">
+		function subscribeResponse() {
+			log.debug("subscribeResponse");
+			// 1. Handle subscription response.
+			// 2. Once subscription is processed (account created):
+			response.complete().then(function() {
+				// 3. The subscription is fully processed.
+			});
+		}
+		function successCallback() {
+			log.debug("successCallback");
+		}
+		(self.SUBSCRIPTIONS = self.SUBSCRIPTIONS || []).push(function(subscriptions) {
+			// subscriptions runtime is ready and can be used.
+			subscriptions.showOffers(['basic_daily_1'], true).then(successCallback);
+			log.debug("subscriptions");
+			//subscriptions.subscribe("rep_gp_1w.0");
+			//subscriptions.subscribe('basic_daily_1');
+
+			//subscriptions.setOnSubscribeResponse(subscribeResponse);
+		});
+	</script>
+	<!--                                                                       -->
+
+</head>
+
+<body>
+
+
+
+</body>
+
+</html>
