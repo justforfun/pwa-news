@@ -446,13 +446,15 @@ to{opacity:1}
 
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   
-<!-- Inizio implementazione json config amp-subscriptions -->
+<!-- Inizio implementazione json config amp-subscriptions 
+"authorizationUrl": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/new_authorization?rid=READER_ID&ts=TIMESTAMP&url=CANONICAL_URL",
+-->
   <script type="application/json" id="amp-subscriptions">
   {
   "services": [{
 
       "pingbackUrl": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/pingback?rid=READER_ID&ts=TIMESTAMP&url=CANONICAL_URL",
-      "authorizationUrl": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/new_authorization?rid=READER_ID&ts=TIMESTAMP&url=CANONICAL_URL",
+      "authorizationUrl": "https:/test-api.repubblica.it/checkpw-v1/premium/amp/new_authorization?rid=READER_ID&ts=TIMESTAMP&url=CANONICAL_URL",
       "actions": {
 
         "login": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/login?rid=READER_ID&fbia=AMPDOC_URL",
@@ -576,7 +578,20 @@ layout="nodisplay"></amp-install-serviceworker><amp-state id="votogenerale" src=
             width="26"
             height="17"
             layout="responsive"
-          ></a><div id="slim-header_access"><a amp-access="NOT showContent" amp-access-hide href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_atm_sherp.slim....abb." class="slim-header_purchase">Abbonati</a><a amp-access="NOT logged" on="tap:amp-access.login-login" amp-access-hide class="slim-header_login"><span>Accedi</span><span class="icon-account_circle"></span></a><div amp-access="logged" amp-access-hide id="account" [class]="visible ? 'active' : ''"><a on="tap:AMP.setState({visible: !visible})"><template type="amp-mustache" amp-access-template>{{profile.nickname}}</template><span class="icon-bottom-arrow"></span></a><div class="account-menu"><a href="https://quotidiano.repubblica.it/edicola/profilo/profiloutente.jsp">Vai al tuo profilo</a><a amp-access="logged" on="tap:amp-access.login-logout" amp-access-hide>Esci</a></div></div></div></div></div></div><div id="bottom-header"><div id="header-content"><a class="branding" href="https://rep.repubblica.it"><amp-img
+          ></a><div id="slim-header_access">
+          <!-- a amp-access="NOT showContent" amp-access-hide href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_atm_sherp.slim....abb." class="slim-header_purchase">Abbonati</a -->
+          <a subscriptions-display="NOT (data.showContent)" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_atm_sherp.slim....abb." class="slim-header_purchase">Abbonati</a>
+          <a subscriptions-display="NOT (data.logged)" subscriptions-action="login" class="slim-header_login"><span>Accedi</span><span class="icon-account_circle"></span></a>
+          <!-- a amp-access="NOT logged" on="tap:amp-access.login-login" amp-access-hide class="slim-header_login"><span>Accedi</span><span class="icon-account_circle"></span></a -->
+          <!-- div amp-access="logged" amp-access-hide id="account" [class]="visible ? 'active' : ''" -->
+          <div subscriptions-display="data.logged" id="account" [class]="visible ? 'active' : ''">  
+            <a on="tap:AMP.setState({visible: !visible})">
+            <!--template type="amp-mustache" amp-access-template>{{profile.nickname}}</template -->
+            <template type="amp-mustache" subscriptions-display="data.logged" subscriptions-dialog>{{data.profile.nickname}}</template>
+            <span class="icon-bottom-arrow"></span></a><div class="account-menu"><a href="https://quotidiano.repubblica.it/edicola/profilo/profiloutente.jsp">Vai al tuo profilo</a>
+            <!-- a amp-access="logged" on="tap:amp-access.login-logout" amp-access-hide>Esci</a -->
+            <a subscriptions-display="data.logged" subscriptions-action="logout">Esci</a>
+          </div></div></div></div></div></div><div id="bottom-header"><div id="header-content"><a class="branding" href="https://rep.repubblica.it"><amp-img
           src="//www.repstatic.it/cless/main/rep21/2017-v1/img/logo-rep.svg"
           alt="Repubblica.it"
           width="150"
@@ -634,11 +649,20 @@ layout="nodisplay"></amp-install-serviceworker><amp-state id="votogenerale" src=
                        layout="fixed" width="200" height="35"
                        ><template type="amp-mustache"><span class="icon-comment"></span><span class="label" [hidden]="{{commentCount}} != 0" >Commenta</span><span class="label" [hidden]="{{commentCount}} != 1" >{{commentCount}} Commento</span><span class="label" [hidden]="{{commentCount}} <= 1" >{{commentCount}} Commenti</span></template></amp-list></button></form></div><div class="detail-save"><a href="#"><span class="icon-bookmark "></span><span class="label">Salva </span></a></div><div class="detail-social"><a on="tap:detail-social_bar.toggleVisibility"><span class="icon-share"></span><span class="label">Condividi </span></a></div><div id="detail-social_bar" hidden><amp-social-share type="email" width=40 height=40></amp-social-share><amp-social-share type="facebook" width=40 height=40 data-param-app_id="182234715127717"></amp-social-share><!-- <amp-social-share type="gplus" width=40 height=40></amp-social-share> --><amp-social-share type="twitter" width=40 height=40 data-param-url="" data-param-text="TITLE CANONICAL_URL @repubblica"></amp-social-share><amp-social-share type="whatsapp" width=40 height=40></amp-social-share></div></div></div><div class="detail-article_container"><div class="detail-article_body" itemprop="articleBody">
                        <!-- div amp-access="NOT (showContent)" amp-access-hide -->
-                       <div subscriptions-dialog subscriptions-display="NOT (data.showContent)">
+                       <!-- div subscriptions-dialog subscriptions-display="NOT (data.showContent)" -->
+                       <div subscriptions-section="content-not-granted"> 
      ROMA -&nbsp; Retroattivo. Iniquo. Arbitrario. E dunque incostituzionale. Ma soprattutto irrealizzabile. Il ricalcolo contributivo delle pensioni d&#39;oro sopra i 4 mila euro netti al mese, 80 mila euro lordi all&#39;anno, contenuto del progetto di legge depositato alla Camera il 6 agosto scorso dai capigruppo di Lega e Cinque Stelle Molinari-D&#39;Uva, viene bocciato da uno studio che Repubblica &egrave; in grado di anticipare. E non si tratta di uno studio qualsiasi. Visto che l&#39;autore...
 
     <!-- section amp-access="NOT (showContent)" amp-access-hide subscriptions-section="content-not-granted" subscriptions-display="NOT (showContent)" -->
-    <section subscriptions-section="content-not-granted"><!-- Solo se l'utente non risulta autorizzato, viene invocato ViewPaywall --><amp-analytics><script type="application/json"> {
+    <section subscriptions-section="content-not-granted">
+      
+    <a class="button2" subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe">Acquista con noi</a>
+    <div 
+      subscriptions-display="NOT (data.showContent)"
+      subscriptions-action="subscribe"
+      subscriptions-service="subscribe.google.com"
+      subscriptions-decorate>Login</div>
+      <!-- Solo se l'utente non risulta autorizzato, viene invocato ViewPaywall --><amp-analytics><script type="application/json"> {
             "requests":{
 
                 "host": "https://www.facebook.com",
@@ -660,24 +684,31 @@ layout="nodisplay"></amp-install-serviceworker><amp-state id="votogenerale" src=
                 }
             }
         }
-        </script></amp-analytics><div class="paywall-fixed"><template amp-access-template type="amp-mustache"><div class="paywall-dynamic"><amp-ad
+        </script></amp-analytics><div class="paywall-fixed">
+        <!-- template amp-access-template type="amp-mustache" -->
+        <template type="amp-mustache" subscriptions-dialog>  
+        <div class="paywall-dynamic"><amp-ad
                 type="adagio"
                 data-sid="22"
                 data-loc="repamp_det_amp_desk"
                  data-fmt="fmt_rep_det_amp"
                 data-pos="Paywall"
                 data-keywords=""
-                data-uservars="{{readerId}}"
+                data-uservars="{{data.readerId}}"
                 layout="intrinsic"
                 media="(min-width: 1224px)"
                 width="740"
-                height="652" ><!-- Paywall statico come placeholder --><div id="paywall-banner-static" placeholder><div class="paywall-banner-inner"><a class="button1" on="tap:amp-access.login-loginpw"></a><a class="button2" on="tap:amp-access.login-purchasedeskphldr"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" on="tap:amp-access.login-purchasemobphldr"></a><div><amp-img id="paywall-banner-inner"
+                height="652" >
+                <!-- Paywall statico come placeholder -->
+                <div id="paywall-banner-static" placeholder>
+                  <div class="paywall-banner-inner">
+                    <a class="button1" subscriptions-display="NOT (data.showContent)" subscriptions-action="login"></a><a class="button2" subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe"></a><div><amp-img id="paywall-banner-inner"
                                    alt="Paywall"
                                    media="(min-width: 890px)"
                                    src="//www.repstatic.it/cless/main/rep21/2017-v1/img/paywall-desktop.png"
                                    width=740
                                    height=652
-                                   layout="responsive" ></amp-img></div></div></div><!-- Paywall statico come fallback --><div id="paywall-banner-static" fallback><div class="paywall-banner-inner"><a class="button1" on="tap:amp-access.login-loginpw"></a><a class="button2" on="tap:amp-access.login-purchasedeskflbk"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" on="tap:amp-access.login-purchasemobflbk"></a><div><amp-img id="paywall-banner-inner"
+                                   layout="responsive" ></amp-img></div></div></div><!-- Paywall statico come fallback --><div id="paywall-banner-static" fallback><div class="paywall-banner-inner"><a class="button1" subscriptions-display="NOT (data.showContent)" subscriptions-action="login"></a><a class="button2" subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe"></a><div><amp-img id="paywall-banner-inner"
                                    alt="Paywall"
                                    media="(min-width: 890px)"
                                    src="//www.repstatic.it/cless/main/rep21/2017-v1/img/paywall-desktop.png"
@@ -690,17 +721,17 @@ layout="nodisplay"></amp-install-serviceworker><amp-state id="votogenerale" src=
                  data-fmt="fmt_rep_det_amp"
                 data-pos="Paywall"
                 data-keywords=""
-                data-uservars="{{readerId}}"
+                data-uservars="{{data.readerId}}"
                 layout="intrinsic"
                 media="(min-width: 890px) and (max-width: 1223px)"
                 width="740"
-                height="652" ><!-- Paywall statico come placeholder --><div id="paywall-banner-static" placeholder><div class="paywall-banner-inner"><a class="button1" on="tap:amp-access.login-loginpw"></a><a class="button2" on="tap:amp-access.login-purchasedeskphldr"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" on="tap:amp-access.login-purchasemobphldr"></a><div><amp-img id="paywall-banner-inner"
+                height="652" ><!-- Paywall statico come placeholder --><div id="paywall-banner-static" placeholder><div class="paywall-banner-inner"><a class="button1" on="tap:amp-access.login-loginpw"></a><a class="button2" subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe"></a><div><amp-img id="paywall-banner-inner"
                                    alt="Paywall"
                                    media="(min-width: 890px)"
                                    src="//www.repstatic.it/cless/main/rep21/2017-v1/img/paywall-desktop.png"
                                    width=740
                                    height=652
-                                   layout="responsive" ></amp-img></div></div></div><!-- Paywall statico come fallback --><div id="paywall-banner-static" fallback><div class="paywall-banner-inner"><a class="button1" on="tap:amp-access.login-loginpw"></a><a class="button2" on="tap:amp-access.login-purchasedeskflbk"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" on="tap:amp-access.login-purchasemobflbk"></a><div><amp-img id="paywall-banner-inner"
+                                   layout="responsive" ></amp-img></div></div></div><!-- Paywall statico come fallback --><div id="paywall-banner-static" fallback><div class="paywall-banner-inner"><a class="button1" subscriptions-display="NOT (data.showContent)" subscriptions-action="login"></a><a class="button2" on="tap:subscriptions-action=subscribe"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe"></a><div><amp-img id="paywall-banner-inner"
                                    alt="Paywall"
                                    media="(min-width: 890px)"
                                    src="//www.repstatic.it/cless/main/rep21/2017-v1/img/paywall-desktop.png"
@@ -713,23 +744,23 @@ layout="nodisplay"></amp-install-serviceworker><amp-state id="votogenerale" src=
                  data-fmt="fmt_rep_det_amp"
                 data-pos="Paywall"
                 data-keywords=""
-                data-uservars="{{readerId}}"
+                data-uservars="{{data.readerId}}"
                 layout="intrinsic"
                 media="(max-width: 889px)"
                 width="372"
-                height="1015" ><div id="paywall-banner-static" placeholder><div class="paywall-banner-inner"><a class="button1" on="tap:amp-access.login-loginpw"></a><a class="button2" on="tap:amp-access.login-purchasedeskphldr"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" on="tap:amp-access.login-purchasemobphldr"></a><div><amp-img id="paywall-banner-inner"
+                height="1015" ><div id="paywall-banner-static" placeholder><div class="paywall-banner-inner"><a class="button1" subscriptions-display="NOT (data.showContent)" subscriptions-action="login"></a><a class="button2" on="tap:amp-access.login-purchasedeskphldr"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe"></a><div><amp-img id="paywall-banner-inner"
                                    alt="Paywall"
                                    media="(max-width: 889px)"
                                    src="//www.repstatic.it/cless/main/rep21/2017-v1/img/paywall-mobile.png"
                                    width=372
                                    height=1015
-                                   layout="responsive" ></amp-img></div></div></div><div id="paywall-banner-static" fallback><div class="paywall-banner-inner"><a class="button1" on="tap:amp-access.login-loginpw"></a><a class="button2" on="tap:amp-access.login-purchasedeskflbk"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" on="tap:amp-access.login-purchasemobflbk"></a><div><amp-img id="paywall-banner-inner"
+                                   layout="responsive" ></amp-img></div></div></div><div id="paywall-banner-static" fallback><div class="paywall-banner-inner"><a class="button1" subscriptions-display="NOT (data.showContent)" subscriptions-action="login"></a><a class="button2" on="tap:amp-access.login-purchasedeskflbk"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe"></a><div><amp-img id="paywall-banner-inner"
                                    alt="Paywall"
                                    media="(max-width: 889px)"
                                    src="//www.repstatic.it/cless/main/rep21/2017-v1/img/paywall-mobile.png"
                                    width=372
                                    height=1015
-                                   layout="responsive" ></amp-img></div></div></div></amp-ad></div></template><!-- START - Static Backup Paywall --><div id="paywall-banner-static" class="paywall-static"><div class="paywall-banner-inner"><a class="button1" on="tap:amp-access.login-loginpw"></a><a class="button2" on="tap:amp-access.login-purchasedesk"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" on="tap:amp-access.login-purchasemob"></a><div><amp-img id="paywall-banner-inner"
+                                   layout="responsive" ></amp-img></div></div></div></amp-ad></div></template><!-- START - Static Backup Paywall --><div id="paywall-banner-static" class="paywall-static"><div class="paywall-banner-inner"><a class="button1" subscriptions-display="NOT (data.showContent)" subscriptions-action="login"></a><a class="button2" subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe"></a><a class="button3" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_pwl_sdp.minisito.campagna_pwl..off1."></a><a class="button4" subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe"></a><div><amp-img id="paywall-banner-inner"
                              alt="Paywall"
                              media="(min-width: 890px)"
                              src="//www.repstatic.it/cless/main/rep21/2017-v1/img/paywall-desktop.png"
