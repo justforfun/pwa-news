@@ -471,7 +471,8 @@ to{opacity:1}
         "purchasemobphldr": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/purchase?rid=READER_ID&source=REP_PWP_MOB&wt_g=rep_pwl_mob.paywall.campagna_pwl.tangeri_repubblica_it/pwa/analisi/2018/02/09/news/cosi_l_italia_abbandona_i_rifugiati_nei_ghetti-161545413/.att.&fbia=AMPDOC_URL",
         "purchasedeskflbk": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/purchase?rid=READER_ID&source=REP_PWF_DESK&wt_g=rep_pwl_desk.paywall.campagna_pwl.tangeri_repubblica_it/pwa/analisi/2018/02/09/news/cosi_l_italia_abbandona_i_rifugiati_nei_ghetti-161545413/.att.&fbia=AMPDOC_URL",
         "purchasemobflbk": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/purchase?rid=READER_ID&source=REP_PWF_MOB&wt_g=rep_pwl_mob.paywall.campagna_pwl.tangeri_repubblica_it/pwa/analisi/2018/02/09/news/cosi_l_italia_abbandona_i_rifugiati_nei_ghetti-161545413/.att.&fbia=AMPDOC_URL",
-        "purchaseswg2": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/purchase?type=swg&rid=READER_ID&source=REP_PWL_DESK&wt_g=rep_pwl_desk.paywall.campagna_pwl.tangeri_repubblica_it/pwa/analisi/2018/02/09/news/cosi_l_italia_abbandona_i_rifugiati_nei_ghetti-161545413/.att.&fbia=AMPDOC_URL"
+        "purchaseswg2": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/purchase?type=swg&rid=READER_ID&source=REP_PWL_DESK&wt_g=rep_pwl_desk.paywall.campagna_pwl.tangeri_repubblica_it/pwa/analisi/2018/02/09/news/cosi_l_italia_abbandona_i_rifugiati_nei_ghetti-161545413/.att.&fbia=AMPDOC_URL",
+        "accessprofile": "https://quotidiano.repubblica.it/edicola/profilo/profiloutente.jsp"
       }
     },  
     {
@@ -580,15 +581,16 @@ layout="nodisplay"></amp-install-serviceworker><amp-state id="votogenerale" src=
             layout="responsive"
           ></a><div id="slim-header_access">
           <!-- a amp-access="NOT showContent" amp-access-hide href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_atm_sherp.slim....abb." class="slim-header_purchase">Abbonati</a -->
-          <a subscriptions-display="NOT (data.showContent)" href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_atm_sherp.slim....abb." class="slim-header_purchase">Abbonati</a>
+          <!--  href="https://quotidiano.repubblica.it/edicola/homerep.jsp?wt_g=rep_atm_sherp.slim....abb." -->
+          <a subscriptions-display="NOT (data.showContent)" subscriptions-action="subscribe" class="slim-header_purchase">Abbonati</a>
           <a subscriptions-display="NOT (data.logged)" subscriptions-action="login" class="slim-header_login"><span>Accedi</span><span class="icon-account_circle"></span></a>
           <!-- a amp-access="NOT logged" on="tap:amp-access.login-login" amp-access-hide class="slim-header_login"><span>Accedi</span><span class="icon-account_circle"></span></a -->
           <!-- div amp-access="logged" amp-access-hide id="account" [class]="visible ? 'active' : ''" -->
-          <div subscriptions-display="data.logged" id="account" [class]="visible ? 'active' : ''">  
+          <div id="account" [class]="visible ? 'active' : ''" >  
             <a on="tap:AMP.setState({visible: !visible})">
             <!--template type="amp-mustache" amp-access-template>{{profile.nickname}}</template -->
-            <template type="amp-mustache" subscriptions-display="data.logged" subscriptions-dialog>{{data.profile.nickname}}</template>
-            <span class="icon-bottom-arrow"></span></a><div class="account-menu"><a href="https://quotidiano.repubblica.it/edicola/profilo/profiloutente.jsp">Vai al tuo profilo</a>
+            <template type="amp-mustache">{{data.profile.nickname}}</template>
+            <span class="icon-bottom-arrow"></span></a><div class="account-menu"><a subscriptions-display="data.logged" subscriptions-action="accessprofile">Vai al tuo profilo</a>
             <!-- a amp-access="logged" on="tap:amp-access.login-logout" amp-access-hide>Esci</a -->
             <a subscriptions-display="data.logged" subscriptions-action="logout">Esci</a>
           </div></div></div></div></div></div><div id="bottom-header"><div id="header-content"><a class="branding" href="https://rep.repubblica.it"><amp-img
