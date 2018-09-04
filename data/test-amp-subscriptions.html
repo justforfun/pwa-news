@@ -825,7 +825,7 @@ L&#39;esperto leghista chiede il ricalcolo contributivo della sua pensione retri
                         "requests": {
                             "host": "https://utilitysocial.repubblica.it/star_rating",
                             "base": "${host}/ratinglog.php",
-                            "ContentVoted" : "${base}?geturl=CANONICAL_URL&rnd=RANDOM&voto=${formFields[voto]}&hash_id=$AUTHDATA(profile.hash_id)",
+                            "ContentVoted" : "${base}?geturl=CANONICAL_URL&rnd=RANDOM&voto=${formFields[voto]}&hash_id=$AUTHDATA(data.profile.hash_id)",
                             "MostVoted" : "https://${canonicalHost}/api/personalcontent-v1/event/rep-locali:rep:205145016/RatingExpl/${formFields[voto]}?hashId=$AUTHDATA(profile.hash_id)"
                         },
                         "triggers": {

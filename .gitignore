@@ -2,3 +2,5 @@
 build/default/main.pyc
 
 build/bundled/data/TEST_COMMENTI_GIGYA_005.html
+
+build/unbundled/src/news-header.html

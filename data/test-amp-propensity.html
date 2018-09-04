@@ -483,6 +483,10 @@ Modificato per test SWG
 "purchasedesk": "https://test.quotidiano.repubblica.it/edicola/manager?rid=READER_ID&zona=rep&service=purchase&urlToken=repnzswg&productId=rep_gp_1w.1&source=REP_PWL_DESK&externalSuccessBackUrl=https://tangeri.repubblica.it&externalFailBackUrl=https://test.quotidiano.repubblica.it/edicola/errorerep.jsp&wt_g=rep_pwl_desk.paywall.campagna_pwl.tangeri_repubblica_it/pwa/analisi/2018/02/09/news/cosi_l_italia_abbandona_i_rifugiati_nei_ghetti-161545413/.att.&fbia=AMPDOC_URL",
 "purchasemob": "https://test.quotidiano.repubblica.it/edicola/manager?rid=READER_ID&zona=rep&service=purchase&urlToken=repnzswg&productId=rep_gp_1w.1&source=REP_PWL_MOB&externalSuccessBackUrl=https://tangeri.repubblica.it&externalFailBackUrl=https://test.quotidiano.repubblica.it/edicola/errorerep.jsp&wt_g=rep_pwl_desk.paywall.campagna_pwl.tangeri_repubblica_it/pwa/analisi/2018/02/09/news/cosi_l_italia_abbandona_i_rifugiati_nei_ghetti-161545413/.att.&fbia=AMPDOC_URL",
 
+
+{"showContent":true,"InternalNetwork":true,"premiumContent":true,"has_metered":false,"has_paywall":true,"readerId":"amp-dA99pVfmQGfSGtgK1nmeRw","fb":{"fbContentTier":"locked","fbisSubscriber":"false"},"pw2":false,"logged":false,"freeview":false,"lstblk":"test_rep_pay","read":"0","remaining":0,"barrier":0,"pwProfile":{"id":2264,"position":330,"name":"test-rep-pay","desc":"Contenuti a pagamento"},"debug":{"config":{"config":{"VALIDITY_PERIOD":"month"},"page":{"tracked":"true","days":"90000","counters":{"default":["test_rep_pay"]},"allowedReferrers":[]},"counter":[{"id":"test_rep_pay","intermediate":[],"limit":0,"redirect":"https:\/\/tangeri.repubblica.it"}],"intermediate":[],"profile":{"id":2264,"position":330,"name":"test-rep-pay","desc":"Contenuti a pagamento"},"referrer":[],"rule":{"id":46,"name":"test-rep-pay"}},"og_url":"https:\/\/tangeri.repubblica.it\/pwa\/analisi\/2018\/02\/09\/news\/cosi_l_italia_abbandona_i_rifugiati_nei_ghetti-161545413\/","has_paywall":true,"has_metered":false,"pwProfile":{"id":2264,"position":330,"name":"test-rep-pay","desc":"Contenuti a pagamento"},"pw2":{"pw2":false,"logged":false,"freeview":false,"lstblk":"test_rep_pay","read":"0","remaining":0,"barrier":0},"counters":{"_vf":"1527836887","_vt":"1530403200","test_rep_pay":{"c":"0","blk":23},"_lstblk":"test_rep_pay"}}}
+
+{"showContent": true}
 -->        
         
         
@@ -502,10 +506,10 @@ Modificato per test SWG
               },
               "pingback": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/pingback?rid=READER_ID&ts=TIMESTAMP&url=CANONICAL_URL",
               "authorization": "https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/authorization?rid=READER_ID&ts=TIMESTAMP&url=CANONICAL_URL",
-              "authorizationFallbackResponse": {"showContent": true}
+              "authorizationFallbackResponse": {"showContent":true,"InternalNetwork":true,"premiumContent":true,"has_metered":false,"has_paywall":true,"readerId":"amp-dA99pVfmQGfSGtgK1nmeRw","fb":{"fbContentTier":"locked","fbisSubscriber":"false"},"pw2":false,"logged":false,"freeview":false,"lstblk":"test_rep_pay","read":"0","remaining":0,"barrier":0,"pwProfile":{"id":2264,"position":330,"name":"test-rep-pay","desc":"Contenuti a pagamento"},"debug":{"config":{"config":{"VALIDITY_PERIOD":"month"},"page":{"tracked":"true","days":"90000","counters":{"default":["test_rep_pay"]},"allowedReferrers":[]},"counter":[{"id":"test_rep_pay","intermediate":[],"limit":0,"redirect":"https:\/\/tangeri.repubblica.it"}],"intermediate":[],"profile":{"id":2264,"position":330,"name":"test-rep-pay","desc":"Contenuti a pagamento"},"referrer":[],"rule":{"id":46,"name":"test-rep-pay"}},"og_url":"https:\/\/tangeri.repubblica.it\/pwa\/analisi\/2018\/02\/09\/news\/cosi_l_italia_abbandona_i_rifugiati_nei_ghetti-161545413\/","has_paywall":true,"has_metered":false,"pwProfile":{"id":2264,"position":330,"name":"test-rep-pay","desc":"Contenuti a pagamento"},"pw2":{"pw2":false,"logged":false,"freeview":false,"lstblk":"test_rep_pay","read":"0","remaining":0,"barrier":0},"counters":{"_vf":"1527836887","_vt":"1530403200","test_rep_pay":{"c":"0","blk":23},"_lstblk":"test_rep_pay"}}}
               }
 </script>
-
+<!-- "readerId":"amp-dA99pVfmQGfSGtgK1nmeRw" -->
     </head>
     
     
@@ -894,18 +898,38 @@ layout="nodisplay">
 
 <!-- 
 https:///examples-amp/ads/prop.json
-https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/testluigi
-https://test-api.repubblica.it/checkpw-v1/premium/amp/testluigi
-https://tangeri.repubblica.it/test-api/checkpw-v1/premium/amp/testluigi?rid=amp-oBE4XABQYzQ0tlRSazbQrQ&ts=1525270323812&url=https%3A%2F%2Ftangeri.repubblica.it%2Fpwa%2Fanalisi%2F2018%2F02%2F09%2Fnews%2Fcosi_l_italia_abbandona_i_rifugiati_nei_ghetti-161545413%2F&__amp_source_origin=http%3A%2F%2Fdev.repubblica.it%3A8080
+"vendors": {
+              "vendor-a": {"RID": {{readerId}}},
+
+},
+{{readerId}}
+json='{"targeting":{"rid":"{{readerId}}"},"categoryExclusions":["sports"]}'
+json='{{readerId}}'
+{}
+"targeting":{"rid":["{{readerId}}"]}
+json='{"targeting":{"rid":"{{readerId}}"}, "rid":"{{readerId}}"}'
 -->
+<!-- template amp-access-template type="amp-mustache">
 <amp-ad
 type="doubleclick"
 data-slot="/35012960/repubblica.pwa/dettaglio/box1"
-rtc-config='{"vendors": {"vendorA": {}},"urls": ["https://test-api.repubblica.it/checkpw-v1/premium/amp/testluigi"]}'
+rtc-config='{
+"urls": ["https://test-api.repubblica.it/checkpw-v1/premium/amp/pts?rid={{readerId}}"]}'
 json='{"targeting":{"loc": "usa"},"categoryExclusions":["sports"]}'
 width="300" height="250">
 </amp-ad>
+</template -->
 
+
+<div class="adv-container">
+      <template amp-access-template type="amp-mustache">        <!-- ADV -->
+        <amp-ad width=300 height=250    type="doubleclick"
+    data-slot="/35012960/_mz_manzoni.it/testGio/gio1/Middle1"
+    rtc-config='{"urls":["https://test-api.gelocal.it/checkpw-v1/messaggeroveneto/amp/pts?rid={{readerId}}"]}'        data-consent-notification-id="amp-user-notification-privacy"
+        json=''
+    >
+</template>
+</div>
 <span style="-webkit-text-stroke-width:0px; background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); display:inline !important; float:none; font-family:sans-serif,arial,verdana,trebuchet ms; font-size:16px; font-style:normal; font-variant-caps:normal; font-variant-ligatures:normal; font-weight:400; letter-spacing:normal; orphans:2; text-align:start; text-decoration-color:initial; text-decoration-style:initial; text-indent:0px; text-transform:none; white-space:normal; widows:2; word-spacing:0px">Dalla Sicilia al Trentino, in queste condizioni vivono almeno 10.000 persone. Cifra per difetto quella contenuta nel secondo rapporto redatto da Medici senza frontiere che, a due anni di distanza, ha mappato i cosiddetti &quot;insediamenti informali&quot; nei quali vivono non solo i migranti identificati, nell&#39;immaginario collettivo, come coloro che approdano in Italia sui barconi, ma migliaia di persone, anche tante famiglie italiane o gente che sta nel nostro Paese da tempo ed &egrave; rimasta senza un tetto. C&#39;&egrave; chi vive cos&igrave; da pi&ugrave; di dieci anni e c&#39;&egrave; chi non avrebbe mai pensato di ritrovarsi in un posto cos&igrave;. Come ad esempio Raphael, 53 anni, venezuelano, che a casa sua faceva il professore universitario di antropologia e il sindacalista che difendeva i campesinos, e nel 2014, mentre stava rientrando da una conferenza in Iran, fu avvertito da un amico che era stato emesso un ordine di cattura nei suoi confronti.</span><br />
 <br />
 <span style="-webkit-text-stroke-width:0px; background-color:rgb(255, 255, 255); color:rgb(51, 51, 51); display:inline !important; float:none; font-family:sans-serif,arial,verdana,trebuchet ms; font-size:16px; font-style:normal; font-variant-caps:normal; font-variant-ligatures:normal; font-weight:400; letter-spacing:normal; orphans:2; text-align:start; text-decoration-color:initial; text-decoration-style:initial; text-indent:0px; text-transform:none; white-space:normal; widows:2; word-spacing:0px">E cos&igrave;, sceso a Fiumicino, &egrave; rimasto a Roma e da quattro anni vive con due gatti in una stanza nell&#39;edificio di viale delle Province occupato da 150 persone senza casa come lui. Ora che la commissione territoriale gli ha pure negato l&#39;asilo ha fatto ricorso al giudice ma &egrave; disperato: &quot;Io davvero non capisco. In Venezuela non posso tornare, la mia famiglia ormai &egrave; l&#39;Italia. Io vorrei dare un contributo qui, vorrei solo essere un cittadino normale. Sono una persona per bene, mi hanno invitato anche a La Sapienza a tenere un seminario, vorrei tornare a insegnare e invece sono costretto a fare lavoretti da elettricista. Molta gente &egrave; convinta che in posti come questo vivono solo criminali, ma qui c&#39;&egrave; tanta gente che lavora, magari in nero, ma lavora e a fianco a me vivono anche due migranti del Camerun. Sa cosa facevano nel loro paese? Gli ingegneri&quot;.</span><br />
