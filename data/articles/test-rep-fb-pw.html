@@ -479,7 +479,9 @@ layout="nodisplay"></amp-install-serviceworker><amp-state id="votogenerale" src=
 
                             "host": "https://www.facebook.com",
                             "base": "${host}/tr?noscript=1",
-                            "ViewPaywall" : "${base}&ev=ViewPaywall&id=${pixelId}&cd[meter_count]=0"
+                            "ViewPaywall" : "${base}&ev=ViewPaywall&id=${pixelId}&cd[meter_count]=0",
+                            "true": "${base}&ev=ViewPaywall&id=${pixelId}&cd[meter_count]=0",
+                            "false": "${base}&ev=Test&id=${pixelId}&cd[meter_count]=0",
                         },
                         "vars":{
 
@@ -491,6 +493,10 @@ layout="nodisplay"></amp-install-serviceworker><amp-state id="votogenerale" src=
                                 "request": "ViewPaywall",
                                 "selector": "#paywall-banner-inner",
                                 "selectionMethod": "scope"
+                            },
+                            "accessAuthorizationReceived": {
+                                "on": "access-authorization-received",
+                                "request": AUTHDATA(fb.fbisSubscriber)
                             }
                         }
                     }
